@@ -1,6 +1,4 @@
-Max Han
-
-# Boilermaker
+# Boilermaker Harry Max
 
 _Good things come in pairs_
 
