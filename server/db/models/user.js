@@ -28,7 +28,7 @@ const User = db.define('user', {
     }
   },
   isAdmin: {
-    type: Sequelize.Boolean,
+    type: Sequelize.BOOLEAN,
     defaultValue: false
   },
   firstName: {
