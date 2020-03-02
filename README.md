@@ -1,4 +1,4 @@
-# Boilermaker Nes Martinez
+# Boilermaker Harry Max Nes
 
 _Good things come in pairs_
 
