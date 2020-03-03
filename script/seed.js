@@ -26,22 +26,24 @@ async function seed() {
 
   const products = await Promise.all([
     Product.create({
-      name: 'Sloth Bed'
+      name: 'Sloth Bed',
+      imageUrl: '../public/img/bed.jpg'
     }),
     Product.create({
-      name: 'Sloth Mask'
+      name: 'Sloth Mask',
+      imageUrl: '../public/img/mask.jpg'
     })
   ]);
 
   const carts = await Promise.all([
     Cart.create({
-      userId: 1,
-      productId: 1,
+      userId: users[0].id,
+      productId: products[0].id,
       quantity: 1
     }),
     Cart.create({
-      userId: 2,
-      productId: 2,
+      userId: users[1].id,
+      productId: products[1].id,
       quantity: 2
     })
   ]);
