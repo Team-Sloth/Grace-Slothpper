@@ -50,7 +50,6 @@ export const auth = (
   }
 
   try {
-    res = await axios.get(`/api/users/${res.data.id}`); // FIXME major hack
     dispatch(getUser(res.data));
     history.push('/home');
   } catch (dispatchOrHistoryErr) {

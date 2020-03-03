@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {getSingleProduct} from '../store';
+import {getSingleProduct, addToCartThunk} from '../store';
 
 /**
  * COMPONENT
@@ -22,7 +22,13 @@ class SingleProduct extends React.Component {
           <p>{product.description}</p>
           <p>Qty: {product.quantity}</p>
         </div>
-        <button>Add 1 to Cart!</button>
+        <button
+          onClick={() =>
+            this.props.addToCart(this.props.user.id, product.id, 1)
+          }
+        >
+          Add 1 to Cart!
+        </button>
       </div>
     );
   }
@@ -33,12 +39,15 @@ class SingleProduct extends React.Component {
  */
 const mapState = state => {
   return {
-    product: state.product
+    product: state.product,
+    user: state.user
   };
 };
 const mapDispatch = dispatch => {
   return {
-    getSingleProduct: id => dispatch(getSingleProduct(id))
+    getSingleProduct: id => dispatch(getSingleProduct(id)),
+    addToCart: (userId, productId, qty) =>
+      dispatch(addToCartThunk(userId, productId, qty))
   };
 };
 
