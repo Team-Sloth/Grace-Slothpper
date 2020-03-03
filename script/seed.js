@@ -79,6 +79,14 @@ async function seed() {
         'Try out our delicious Sloth Sushi, good for people AND sloths! It has rice and carrots. Look at it smiling back at you! It is perfect for vegetarians.',
       price: 8.0,
       quantity: 36
+    }),
+    Product.create({
+      name: '2 Slow 2 Curious Movie DVD',
+      imageUrl: '/img/2slow2curious.jpg',
+      description:
+        'The sloths are back and slower than ever! Catch this classic featuring Slothacris on DVD while supplies last -- or attend one of our live showings every Thursday morning!',
+      price: 26.99,
+      quantity: 50
     })
   ]);
 
