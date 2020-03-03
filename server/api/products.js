@@ -19,3 +19,22 @@ router.get('/:productId', async (req, res, next) => {
     next(err);
   }
 });
+
+router.post('/:productId', async (req, res, next) => {
+  try {
+    if (!req.user.isAdmin) {
+      const adminErr = new Error('Restricted');
+      adminErr.status = 405;
+      return next(adminErr);
+    }
+    const [count, product] = await Product.update(req.body, {
+      where: {id: req.params.productId},
+      returning: true
+    });
+    res.json(product);
+  } catch (err) {
+    next(err);
+  }
+});
+
+// post / to create a new product
