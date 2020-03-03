@@ -27,11 +27,11 @@ async function seed() {
   const products = await Promise.all([
     Product.create({
       name: 'Sloth Bed',
-      imageUrl: '../public/img/bed.jpg'
+      imageUrl: '/img/bed.jpg'
     }),
     Product.create({
       name: 'Sloth Mask',
-      imageUrl: '../public/img/mask.jpg'
+      imageUrl: '/img/mask.jpg'
     })
   ]);
 
