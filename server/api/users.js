@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const {User, Cart} = require('../db/models');
+const {User, Cart, Product} = require('../db/models');
 module.exports = router;
 
 router.get('/', async (req, res, next) => {
@@ -16,6 +16,13 @@ router.get('/', async (req, res, next) => {
   }
 });
 
+/*
+{...user,
+  cart: [
+    { quantity: X, productId: X, product: ...product }
+  ]
+}
+*/
 router.get('/:userId', async (req, res, next) => {
   const userId = req.params.userId;
   try {
@@ -25,6 +32,10 @@ router.get('/:userId', async (req, res, next) => {
         userId: userId
       }
     });
+    for (let i = 0; i < cartItems.length; i++) {
+      const product = await Product.findByPk(cartItems[i].productId);
+      cartItems[i].product = product;
+    }
     res.json({...user, cart: cartItems});
   } catch (err) {
     next(err);
