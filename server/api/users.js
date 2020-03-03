@@ -4,11 +4,16 @@ module.exports = router;
 
 router.get('/', async (req, res, next) => {
   try {
+    if (!req.user.isAdmin) {
+      const adminErr = new Error('Restricted');
+      adminErr.status = 405;
+      return next(adminErr);
+    }
     const users = await User.findAll({
       // explicitly select only the id and email fields - even though
       // users' passwords are encrypted, it won't help if we just
       // send everything to anyone who asks!
-      attributes: ['id', 'email']
+      attributes: ['id', 'email', 'firstName', 'lastName']
     });
     res.json(users);
   } catch (err) {
