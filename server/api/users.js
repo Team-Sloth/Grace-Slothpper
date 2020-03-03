@@ -44,18 +44,35 @@ router.get('/:userId', async (req, res, next) => {
   }
 });
 
-// Add or remove item from cart
+// Change quantity of item in cart
 router.post('/:userId', async (req, res, next) => {
   try {
-    const item = await Cart.findOrCreate({
+    const [product, created] = await Cart.findOrCreate({
       where: {
         userId: req.params.userId,
-        itemId: req.body.itemId
+        productId: req.body.productId
       }
     });
-    item.quantity = req.body.quantity;
-    await item.update();
-    res.json(item);
+    product.quantity = req.body.quantity;
+    await product.update();
+    res.json(product);
+  } catch (err) {
+    next(err);
+  }
+});
+
+// Add or remove item(s) from cart
+router.put('/:userId', async (req, res, next) => {
+  try {
+    const [product, created] = await Cart.findOrCreate({
+      where: {
+        userId: req.params.userId,
+        productId: req.body.productId
+      }
+    });
+    product.quantity = product.quantity + req.body.quantity;
+    await product.save();
+    res.json(product);
   } catch (err) {
     next(err);
   }
