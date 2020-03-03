@@ -14,16 +14,6 @@ router.post('/login', async (req, res, next) => {
       console.log('Incorrect password for user:', req.body.email);
       res.status(401).send('Wrong username and/or password');
     } else {
-      const cartItems = await Cart.findAll({
-        where: {
-          userId: user.id
-        }
-      });
-      for (let i = 0; i < cartItems.length; i++) {
-        const product = await Product.findByPk(cartItems[i].productId);
-        cartItems[i].product = product;
-      }
-      user.cart = cartItems;
       req.login(user, err => (err ? next(err) : res.json(user)));
     }
   } catch (err) {

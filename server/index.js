@@ -34,16 +34,6 @@ passport.serializeUser((user, done) => done(null, user.id));
 passport.deserializeUser(async (id, done) => {
   try {
     const user = await db.models.user.findByPk(id);
-    const cartItems = await db.models.cart.findAll({
-      where: {
-        userId: user.id
-      }
-    });
-    for (let i = 0; i < cartItems.length; i++) {
-      const product = await db.models.product.findByPk(cartItems[i].productId);
-      cartItems[i].product = product;
-    }
-    user.cart = cartItems;
     done(null, user);
   } catch (err) {
     done(err);
