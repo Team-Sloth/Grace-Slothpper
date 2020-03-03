@@ -105,6 +105,7 @@ class DiscProductForm extends Component {
     );
   }
 }
+
 const mapDispatchToProps = dispatch => ({
   addProduct: project => dispatch(addProduct(project))
 });
