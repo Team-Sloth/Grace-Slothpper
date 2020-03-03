@@ -1,18 +1,32 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import {connect} from 'react-redux'
+import React from 'react';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 
 /**
  * COMPONENT
  */
-export const UserHome = props => {
-  const {email} = props
+export class UserHome {
+  render() {
+    const {user} = this.props;
 
-  return (
-    <div>
-      <h3>Welcome, {email}</h3>
-    </div>
-  )
+    return (
+      <div>
+        <h3>Welcome, {user.email}</h3>
+        {user.cart.map(p => (
+          <div>
+            <img src={p.product.imageUrl} />
+            <h3>
+              {p.product.name} &mdash; x{p.quantity}
+            </h3>
+            <p>
+              Price: ${p.product.price} * {p.quantity} = ${p.product.price *
+                p.quantity}
+            </p>
+          </div>
+        ))}
+      </div>
+    );
+  }
 }
 
 /**
@@ -20,15 +34,8 @@ export const UserHome = props => {
  */
 const mapState = state => {
   return {
-    email: state.user.email
-  }
-}
+    user: state.user
+  };
+};
 
-export default connect(mapState)(UserHome)
-
-/**
- * PROP TYPES
- */
-UserHome.propTypes = {
-  email: PropTypes.string
-}
+export default connect(mapState)(UserHome);
