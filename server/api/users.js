@@ -26,17 +26,19 @@ router.get('/', async (req, res, next) => {
 router.get('/:userId', async (req, res, next) => {
   const userId = req.params.userId;
   try {
-    const user = await User.findByPk(userId);
+    const user = await User.findByPk(userId, {raw: true});
     const cartItems = await Cart.findAll({
       where: {
         userId: userId
-      }
+      },
+      raw: true
     });
     for (let i = 0; i < cartItems.length; i++) {
       const product = await Product.findByPk(cartItems[i].productId);
       cartItems[i].product = product;
     }
-    res.json({...user, cart: cartItems});
+    user.cart = cartItems;
+    res.json(user);
   } catch (err) {
     next(err);
   }
