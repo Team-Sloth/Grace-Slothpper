@@ -5,29 +5,26 @@ import {connect} from 'react-redux';
 /**
  * COMPONENT
  */
-export class UserHome {
-  render() {
-    const {user} = this.props;
-
-    return (
-      <div>
-        <h3>Welcome, {user.email}</h3>
-        {user.cart.map(p => (
-          <div>
-            <img src={p.product.imageUrl} />
-            <h3>
-              {p.product.name} &mdash; x{p.quantity}
-            </h3>
-            <p>
-              Price: ${p.product.price} * {p.quantity} = ${p.product.price *
-                p.quantity}
-            </p>
-          </div>
-        ))}
-      </div>
-    );
-  }
-}
+export const UserHome = props => {
+  const {user} = props;
+  return (
+    <div>
+      <h3>Welcome, {user.email}</h3>
+      {user.cart.map(p => (
+        <div>
+          <img src={p.product.imageUrl} />
+          <h3>
+            {p.product.name} &mdash; x{p.quantity}
+          </h3>
+          <p>
+            Price: ${p.product.price} * {p.quantity} = ${p.product.price *
+              p.quantity}
+          </p>
+        </div>
+      ))}
+    </div>
+  );
+};
 
 /**
  * CONTAINER
