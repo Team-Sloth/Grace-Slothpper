@@ -1,4 +1,3 @@
-const crypto = require('crypto');
 const Sequelize = require('sequelize');
 const db = require('../db');
 
@@ -31,7 +30,7 @@ const Product = db.define('product', {
     type: Sequelize.FLOAT,
     defaultValue: null
   },
-  imgUrl: {
+  imageUrl: {
     type: Sequelize.STRING,
     defaultValue: '../../../public/img/mask.jpg'
   }
