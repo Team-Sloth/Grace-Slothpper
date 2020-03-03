@@ -11,7 +11,7 @@ export const UserHome = props => {
     <div>
       <h3>Welcome, {user.email}</h3>
       {user.cart.map(p => (
-        <div>
+        <div key={p.productId}>
           <img src={p.product.imageUrl} />
           <h3>
             {p.product.name} &mdash; x{p.quantity}
