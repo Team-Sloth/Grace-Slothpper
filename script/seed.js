@@ -71,6 +71,14 @@ async function seed() {
         'Please buy this delcious Leaf for your sloth friend! It is green and picked fresh from a local home grown tree. Makes for a meal that will have you saying, "Bon Appetit!!"',
       price: 4.0,
       quantity: 82
+    }),
+    Product.create({
+      name: 'Sloth Sushi',
+      imageUrl: '/img/sushi.jpg',
+      description:
+        'Try out our delicious Sloth Sushi, good for people AND sloths! It has rice and carrots. Look at it smiling back at you! It is perfect for vegetarians.',
+      price: 8.0,
+      quantity: 36
     })
   ]);
 
