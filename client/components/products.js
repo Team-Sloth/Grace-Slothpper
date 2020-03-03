@@ -9,7 +9,7 @@ import {Link} from 'react-router-dom';
  */
 class Products extends React.Component {
   componentDidMount() {
-    getProducts();
+    this.props.getProducts();
   }
   render() {
     const {products} = this.props;
@@ -40,5 +40,10 @@ const mapState = state => {
     products: state.products
   };
 };
+const mapDispatch = dispatch => {
+  return {
+    getProducts: () => dispatch(getProducts())
+  };
+};
 
-export default connect(mapState)(Products);
+export default connect(mapState, mapDispatch)(Products);

@@ -8,7 +8,7 @@ import {getSingleProduct} from '../store';
  */
 class SingleProduct extends React.Component {
   componentDidMount() {
-    getSingleProduct(this.props.match.params.id);
+    this.props.getSingleProduct(this.props.match.params.id);
   }
   render() {
     const {product} = this.props;
@@ -36,5 +36,10 @@ const mapState = state => {
     product: state.product
   };
 };
+const mapDispatch = dispatch => {
+  return {
+    getSingleProduct: id => dispatch(getSingleProduct(id))
+  };
+};
 
-export default connect(mapState)(SingleProduct);
+export default connect(mapState, mapDispatch)(SingleProduct);
