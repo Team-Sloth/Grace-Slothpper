@@ -8,3 +8,4 @@ export {default as UserCart} from './user-cart';
 export {Login, Signup} from './auth-form';
 export {default as Products} from './products';
 export {default as SingleProduct} from './single-product';
+export {default as Users} from './users';
