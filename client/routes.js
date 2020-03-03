@@ -8,6 +8,7 @@ import {
   UserCart,
   Products,
   SingleProduct,
+  Users
   Home
 } from './components';
 import {me} from './store';
@@ -21,7 +22,7 @@ class Routes extends Component {
   }
 
   render() {
-    const {isLoggedIn} = this.props;
+    const {isLoggedIn, user} = this.props;
 
     return (
       <Switch>
@@ -30,6 +31,7 @@ class Routes extends Component {
         <Route path="/signup" component={Signup} />
         <Route exact path="/products" component={Products} />
         <Route path="/products/:id" component={SingleProduct} />
+        <Route path="/users" component={Users} />
         <Route path="/home" component={Home} />
         {isLoggedIn && (
           <Switch>
