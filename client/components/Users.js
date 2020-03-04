@@ -12,7 +12,7 @@ class Users extends React.Component {
     return (
       <div>
         {users.map(user => (
-          <Link to={`/products/${user.id}`} key={user.id}>
+          <Link to={`/users/${user.id}`} key={user.id}>
             <div>
               <h4>{user.name}</h4>
               <p>{`${user.firstName} ${user.lastName}`}</p>

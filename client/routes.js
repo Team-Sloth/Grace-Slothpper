@@ -10,6 +10,7 @@ import {
   SingleProduct,
   AddProduct,
   Users,
+  SingleUser,
   Home
 } from './components';
 import {me} from './store';
@@ -33,7 +34,8 @@ class Routes extends Component {
         <Route exact path="/products" component={Products} />
         <Route path="/add-product" component={AddProduct} />
         <Route path="/products/:id" component={SingleProduct} />
-        <Route path="/users" component={Users} />
+        <Route exact path="/users" component={Users} />
+        <Route path="/users/:id" component={SingleUser} />
         <Route path="/home" component={Home} />
         {isLoggedIn && (
           <Switch>
