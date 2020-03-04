@@ -2,13 +2,8 @@ const router = require('express').Router();
 const {User, Cart, Product} = require('../db/models');
 module.exports = router;
 
-router.get('/', async (req, res, next) => {
+router.get('/', validateAdmin, async (req, res, next) => {
   try {
-    if (!req.user.isAdmin) {
-      const adminErr = new Error('Restricted');
-      adminErr.status = 405;
-      return next(adminErr);
-    }
     const users = await User.findAll({
       // explicitly select only the id and email fields - even though
       // users' passwords are encrypted, it won't help if we just
@@ -16,6 +11,21 @@ router.get('/', async (req, res, next) => {
       attributes: ['id', 'email', 'firstName', 'lastName']
     });
     res.json(users);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.get('/:userId/profile', async (req, res, next) => {
+  const userId = req.params.userId;
+  try {
+    if (!req.user || (!req.user.isAdmin && req.user.id !== userId)) {
+      const adminErr = new Error('Restricted');
+      adminErr.status = 405;
+      return next(adminErr);
+    }
+    const user = await User.findByPk(userId);
+    res.json(user);
   } catch (err) {
     next(err);
   }
