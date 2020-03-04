@@ -35,7 +35,7 @@ export const getSingleUser = id => async dispatch => {
 
 export const updateSingleUser = (id, user) => async dispatch => {
   try {
-    const {data} = await axios.post(`/api/users/${id}`, user);
+    const {data} = await axios.put(`/api/users/${id}`, user);
     dispatch(updatedSingleUser(data));
   } catch (err) {
     console.error(err);
