@@ -1,25 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {getCart} from '../store';
+import {getCart, checkOut} from '../store';
 
 /**
  * COMPONENT
  */
 class UserCart extends React.Component {
   componentDidMount() {
-    console.log(this.props.user);
     this.props.getCart(this.props.user.id);
   }
   render() {
     const {cart} = this.props;
     return (
       <div>
-        <h3>Welcome, {this.props.user.email}</h3>
+        <h3>{this.props.user.firstName}'s Cart:</h3>
         {cart
           ? cart.map(p => (
-              <div key={p.productId}>
-                <img src={p.imageUrl} />
+              <div key={p.id}>
+                <img src={p.imageUrl} height="200px" />
                 <h3>
                   {p.name} &mdash; x{p.lineItem.quantity}
                 </h3>
@@ -31,6 +30,9 @@ class UserCart extends React.Component {
               </div>
             ))
           : ''}
+        <button onClick={() => this.props.checkOut(this.props.user.id)}>
+          Check Out
+        </button>
       </div>
     );
   }
@@ -48,7 +50,8 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    getCart: userId => dispatch(getCart(userId))
+    getCart: userId => dispatch(getCart(userId)),
+    checkOut: userId => dispatch(checkOut(userId))
   };
 };
 
