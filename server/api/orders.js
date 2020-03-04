@@ -19,13 +19,13 @@ router.get('/', async (req, res, next) => {
 
 router.get('/cart/:userId', async (req, res, next) => {
   try {
-    const user = await User.findByPk(req.params.userId);
-    const cartOrders = await user.getOrders({
+    const [cartOrder, cartCreated] = await Order.findOrCreate({
       where: {
+        userId: req.params.userId,
         isCart: true
       }
     });
-    const products = await cartOrders[0].getProducts();
+    const products = await cartOrder.getProducts();
     res.json(products);
   } catch (err) {
     next(err);
