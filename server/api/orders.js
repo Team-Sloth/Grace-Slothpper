@@ -47,18 +47,18 @@ router.get('/:orderId', async (req, res, next) => {
   }
 });
 
+// Add items to cart
 router.put('/cart/:userId', async (req, res, next) => {
   try {
-    const user = await User.findByPk(req.params.userId);
-    const cartOrders = await user.getOrders({
+    const [cartOrder, cartCreated] = await Order.findOrCreate({
       where: {
+        userId: req.params.userId,
         isCart: true
       }
     });
-    const cartOrderId = cartOrders[0].id;
     const [lineItem, created] = await LineItem.findOrCreate({
       where: {
-        orderId: cartOrderId,
+        orderId: cartOrder.id,
         productId: req.body.productId
       }
     });
@@ -70,7 +70,7 @@ router.put('/cart/:userId', async (req, res, next) => {
   }
 });
 
-// Add or remove item(s) from order/cart
+// Add or remove item(s) from order
 router.put('/:orderId', async (req, res, next) => {
   try {
     const [lineItem, created] = await LineItem.findOrCreate({
@@ -82,6 +82,23 @@ router.put('/:orderId', async (req, res, next) => {
     lineItem.quantity = lineItem.quantity + req.body.quantity;
     await lineItem.save();
     res.json(lineItem);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.delete('/cart/:userId', async (req, res, next) => {
+  try {
+    const user = await User.findByPk(req.params.userId);
+    const cartOrders = await user.getOrders({
+      where: {
+        isCart: true
+      }
+    });
+    cartOrders[0].isCart = false;
+    cartOrders[0].date = new Date();
+    await cartOrders[0].save();
+    res.json(cartOrders[0]);
   } catch (err) {
     next(err);
   }
