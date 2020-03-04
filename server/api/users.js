@@ -1,8 +1,9 @@
 const router = require('express').Router();
+const validateAdmin = require('../middleware');
 const {User, Order} = require('../db/models');
 module.exports = router;
 
-router.get('/', async (req, res, next) => {
+router.get('/', validateAdmin, async (req, res, next) => {
   try {
     if (!req.user.isAdmin) {
       const adminErr = new Error('Restricted');
@@ -22,6 +23,28 @@ router.get('/', async (req, res, next) => {
   }
 });
 
+router.get('/:userId/profile', async (req, res, next) => {
+  const userId = req.params.userId;
+  try {
+    if (!req.user || (!req.user.isAdmin && req.user.id !== userId)) {
+      const adminErr = new Error('Restricted');
+      adminErr.status = 405;
+      return next(adminErr);
+    }
+    const user = await User.findByPk(userId);
+    res.json(user);
+  } catch (err) {
+    next(err);
+  }
+});
+
+/*
+{...user,
+  cart: [
+    { quantity: X, productId: X, product: ...product }
+  ]
+}
+*/
 router.get('/:userId', async (req, res, next) => {
   const userId = req.params.userId;
   try {

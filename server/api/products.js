@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const {Product} = require('../db/models');
+const validateAdmin = require('../middleware');
 module.exports = router;
 
 router.get('/', async (req, res, next) => {
@@ -22,7 +23,7 @@ router.get('/:productId', async (req, res, next) => {
 
 router.post('/:productId', async (req, res, next) => {
   try {
-    if (!req.user.isAdmin) {
+    if (!req.user || !req.user.isAdmin) {
       const adminErr = new Error('Restricted');
       adminErr.status = 405;
       return next(adminErr);
@@ -37,13 +38,8 @@ router.post('/:productId', async (req, res, next) => {
   }
 });
 
-router.delete('/:productId', async (req, res, next) => {
+router.delete('/:productId', validateAdmin, async (req, res, next) => {
   try {
-    if (!req.user.isAdmin) {
-      const adminErr = new Error('Restricted');
-      adminErr.status = 405;
-      return next(adminErr);
-    }
     const product = await Product.findByPk(req.params.productId);
     if (!product) return res.sendStatus(404);
     await product.destroy();
@@ -53,18 +49,24 @@ router.delete('/:productId', async (req, res, next) => {
   }
 });
 
-router.post('/', async (req, res, next) => {
+router.post('/', validateAdmin, async (req, res, next) => {
   try {
-    if (!req.user.isAdmin) {
-      const adminErr = new Error('Restricted');
-      adminErr.status = 405;
-      return next(adminErr);
-    }
     const product = await Product.create(req.body);
-    res.send(product);
+    res.json(product);
   } catch (err) {
     next(err);
   }
 });
 
-// post / to create a new product
+router.put('/:productId', validateAdmin, async (req, res, next) => {
+  const productId = req.params.productId;
+  try {
+    const [count, product] = await Product.update(req.body, {
+      where: {id: productId},
+      returning: true
+    });
+    res.json(product);
+  } catch (err) {
+    next(err);
+  }
+});
