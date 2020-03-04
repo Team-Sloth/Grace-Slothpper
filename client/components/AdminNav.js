@@ -8,9 +8,17 @@ const AdminNav = ({isAdmin}) => (
       <Redirect to="/" />
     ) : (
       <div>
-        <Link to="/users">Users</Link>
-        <Link to="/products">Products</Link>
-        <Link to="/orders">Orders</Link>
+        <ul>
+          <li>
+            <Link to="/users">Users</Link>
+          </li>
+          <li>
+            <Link to="/products">Products</Link>
+          </li>
+          <li>
+            <Link to="/orders">Orders</Link>
+          </li>
+        </ul>
       </div>
     )}
   </Fragment>
