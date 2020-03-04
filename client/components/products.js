@@ -19,11 +19,11 @@ class Products extends React.Component {
           <Link to={`/products/${p.id}`} key={p.id}>
             <div>
               <h3>
-                {p.name} &mdash; ${p.price}
+                {p.name} &mdash; ${p.price / 100}
               </h3>
               <img src={p.imageUrl} />
               <p>{p.description}</p>
-              <p>Qty: {p.quantity}</p>
+              <p>In Stock: {p.stock}</p>
             </div>
           </Link>
         ))}

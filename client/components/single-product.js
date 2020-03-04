@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {getSingleProduct, addToCartThunk} from '../store';
+import {getSingleProduct, addToCart} from '../store';
 
 /**
  * COMPONENT
@@ -16,11 +16,11 @@ class SingleProduct extends React.Component {
       <div>
         <div>
           <h3>
-            {product.name} &mdash; ${product.price}
+            {product.name} &mdash; ${product.price / 100}
           </h3>
           <img src={product.imageUrl} />
           <p>{product.description}</p>
-          <p>Qty: {product.quantity}</p>
+          <p>In Stock: {product.stock}</p>
         </div>
         <button
           onClick={() =>
@@ -47,7 +47,7 @@ const mapDispatch = dispatch => {
   return {
     getSingleProduct: id => dispatch(getSingleProduct(id)),
     addToCart: (userId, productId, qty) =>
-      dispatch(addToCartThunk(userId, productId, qty))
+      dispatch(addToCart(userId, productId, qty))
   };
 };
 
