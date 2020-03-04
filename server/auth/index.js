@@ -21,6 +21,7 @@ router.post('/login', async (req, res, next) => {
 
 router.post('/signup', async (req, res, next) => {
   try {
+    // problem we are creating a user from whatever is coming from front-end. A user can use postman and send info + isAdmin true. Make sure that you do not let someone pass email, password, amd admin via req.body
     const user = await User.create(req.body);
     req.login(user, err => (err ? next(err) : res.json(user)));
   } catch (err) {

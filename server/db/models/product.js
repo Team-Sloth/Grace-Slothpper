@@ -31,6 +31,7 @@ const Product = db.define('product', {
     allowNull: false,
     defaultValue: 199
   },
+  // add utility method to dive by 100
   salePrice: {
     type: Sequelize.INTEGER,
     defaultValue: null
