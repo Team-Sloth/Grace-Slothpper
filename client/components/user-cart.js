@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {getCart, checkOut, addToCart} from '../store';
+import {getCart, checkOut, deleteLineItem, addToCart} from '../store';
 
 /**
  * COMPONENT
@@ -27,9 +27,14 @@ class UserCart extends React.Component {
                     100 *
                     p.lineItem.quantity}
                 </p>
+                <button
+                  onClick={() =>
+                    this.props.deleteLineItem(this.props.user.id, p.id)
+                  }
+                >DELETE PRODUCT X</button>
                 <button onClick={() => this.props.addToCart(user.id, p.id, 1)}>
                   +1
-                </button>{' '}
+                </button>
                 <button onClick={() => this.props.addToCart(user.id, p.id, -1)}>
                   -1
                 </button>
@@ -56,6 +61,8 @@ const mapDispatch = dispatch => {
   return {
     getCart: userId => dispatch(getCart(userId)),
     checkOut: userId => dispatch(checkOut(userId)),
+    deleteLineItem: (userId, productId) =>
+      dispatch(deleteLineItem(userId, productId)),
     addToCart: (userId, productId, qty) =>
       dispatch(addToCart(userId, productId, qty))
   };
