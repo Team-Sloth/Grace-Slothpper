@@ -87,6 +87,7 @@ router.put('/:orderId', async (req, res, next) => {
   }
 });
 
+// Delete or reset cart post checkout
 router.delete('/cart/:userId', async (req, res, next) => {
   try {
     const user = await User.findByPk(req.params.userId);
@@ -99,6 +100,26 @@ router.delete('/cart/:userId', async (req, res, next) => {
     cartOrders[0].date = new Date();
     await cartOrders[0].save();
     res.json(cartOrders[0]);
+  } catch (err) {
+    next(err);
+  }
+});
+
+// Delete lineItem from cart
+router.delete('/cart/:userId/:productId', async (req, res, next) => {
+  try {
+    const lineItem = await LineItem.findOne({
+      where: {
+        orderId: req.params.orderId,
+        productId: req.body.productId
+      }
+    });
+    await lineItem.destroy({
+      where: {
+        productId: +req.params.productId
+      }
+    });
+    res.sendStatus(200);
   } catch (err) {
     next(err);
   }
