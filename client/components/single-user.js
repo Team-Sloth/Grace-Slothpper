@@ -33,8 +33,9 @@ class SingleUser extends React.Component {
   }
 
   handleSubmit(event) {
+    const id = this.props.match.params.id;
     event.preventDefault();
-    this.props.updateSingleUser(this.state);
+    this.props.updateSingleUser(id, this.state);
   }
 
   render() {
