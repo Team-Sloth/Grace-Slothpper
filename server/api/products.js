@@ -22,7 +22,7 @@ router.get('/:productId', async (req, res, next) => {
 
 router.post('/:productId', async (req, res, next) => {
   try {
-    if (!req.user.isAdmin) {
+    if (!req.user || !req.user.isAdmin) {
       const adminErr = new Error('Restricted');
       adminErr.status = 405;
       return next(adminErr);
@@ -39,7 +39,7 @@ router.post('/:productId', async (req, res, next) => {
 
 router.delete('/:productId', async (req, res, next) => {
   try {
-    if (!req.user.isAdmin) {
+    if (!req.user || !req.user.isAdmin) {
       const adminErr = new Error('Restricted');
       adminErr.status = 405;
       return next(adminErr);
@@ -55,16 +55,32 @@ router.delete('/:productId', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    if (!req.user.isAdmin) {
+    if (!req.user || !req.user.isAdmin) {
       const adminErr = new Error('Restricted');
       adminErr.status = 405;
       return next(adminErr);
     }
     const product = await Product.create(req.body);
-    res.send(product);
+    res.json(product);
   } catch (err) {
     next(err);
   }
 });
 
-// post / to create a new product
+router.put('/:productId', async (req, res, next) => {
+  const productId = req.params.productId;
+  try {
+    if (!req.user || !req.user.isAdmin) {
+      const adminErr = new Error('Restricted');
+      adminErr.status = 405;
+      return next(adminErr);
+    }
+    const [count, product] = await Product.update(req.body, {
+      where: {id: productId},
+      returning: true
+    });
+    res.json(product);
+  } catch (err) {
+    next(err);
+  }
+});
