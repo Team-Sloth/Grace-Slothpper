@@ -25,7 +25,9 @@ router.get('/cart/:userId', async (req, res, next) => {
         isCart: true
       }
     });
-    const products = await cartOrder.getProducts();
+    const products = await cartOrder.getProducts({
+      include: [{model: Order}]
+    });
     res.json(products);
   } catch (err) {
     next(err);

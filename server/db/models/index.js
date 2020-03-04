@@ -13,7 +13,7 @@ const LineItem = require('./line-item');
 User.hasMany(Order);
 
 Order.belongsToMany(Product, {through: LineItem});
-//Product.belongsToMany(Order, {through: LineItem});
+Product.belongsToMany(Order, {through: LineItem});
 
 /**
  * We'll exp ort all of our models here, so that any time a module needs a model,

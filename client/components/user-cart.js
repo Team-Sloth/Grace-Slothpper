@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {getCart, checkOut, deleteLineItem} from '../store';
+import {getCart, checkOut, deleteLineItem, addToCart} from '../store';
 
 /**
  * COMPONENT
@@ -11,10 +11,10 @@ class UserCart extends React.Component {
     this.props.getCart(this.props.user.id);
   }
   render() {
-    const {cart} = this.props;
+    const {cart, user} = this.props;
     return (
       <div>
-        <h3>{this.props.user.firstName}'s Cart:</h3>
+        <h3>{user.firstName}'s Cart:</h3>
         {cart
           ? cart.map(p => (
               <div key={p.id}>
@@ -31,16 +31,17 @@ class UserCart extends React.Component {
                   onClick={() =>
                     this.props.deleteLineItem(this.props.user.id, p.id)
                   }
-                >
-                  {' '}
-                  DELETE PRODUCT X{' '}
+                >DELETE PRODUCT X</button>
+                <button onClick={() => this.props.addToCart(user.id, p.id, 1)}>
+                  +1
+                </button>
+                <button onClick={() => this.props.addToCart(user.id, p.id, -1)}>
+                  -1
                 </button>
               </div>
             ))
           : ''}
-        <button onClick={() => this.props.checkOut(this.props.user.id)}>
-          Check Out
-        </button>
+        <button onClick={() => this.props.checkOut(user.id)}>Check Out</button>
       </div>
     );
   }
@@ -61,7 +62,9 @@ const mapDispatch = dispatch => {
     getCart: userId => dispatch(getCart(userId)),
     checkOut: userId => dispatch(checkOut(userId)),
     deleteLineItem: (userId, productId) =>
-      dispatch(deleteLineItem(userId, productId))
+      dispatch(deleteLineItem(userId, productId)),
+    addToCart: (userId, productId, qty) =>
+      dispatch(addToCart(userId, productId, qty))
   };
 };
 

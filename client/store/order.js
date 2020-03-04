@@ -87,6 +87,12 @@ export default function(state = [], action) {
       return [];
     case DELETED_LINE_ITEM:
       return state.filter(item => item.id !== action.productId);
+    case ADDED_TO_CART: {
+      const stateCopy = [...state];
+      const product = stateCopy.find(p => p.id === action.lineItem.productId);
+      product.lineItem = action.lineItem;
+      return stateCopy;
+    }
     default:
       return state;
   }
