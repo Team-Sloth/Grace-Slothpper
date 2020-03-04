@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {getCart, checkOut} from '../store';
+import {getCart, checkOut, addToCart} from '../store';
 
 /**
  * COMPONENT
@@ -11,10 +11,10 @@ class UserCart extends React.Component {
     this.props.getCart(this.props.user.id);
   }
   render() {
-    const {cart} = this.props;
+    const {cart, user} = this.props;
     return (
       <div>
-        <h3>{this.props.user.firstName}'s Cart:</h3>
+        <h3>{user.firstName}'s Cart:</h3>
         {cart
           ? cart.map(p => (
               <div key={p.id}>
@@ -27,12 +27,16 @@ class UserCart extends React.Component {
                     100 *
                     p.lineItem.quantity}
                 </p>
+                <button onClick={() => this.props.addToCart(user.id, p.id, 1)}>
+                  +1
+                </button>{' '}
+                <button onClick={() => this.props.addToCart(user.id, p.id, -1)}>
+                  -1
+                </button>
               </div>
             ))
           : ''}
-        <button onClick={() => this.props.checkOut(this.props.user.id)}>
-          Check Out
-        </button>
+        <button onClick={() => this.props.checkOut(user.id)}>Check Out</button>
       </div>
     );
   }
@@ -51,7 +55,9 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     getCart: userId => dispatch(getCart(userId)),
-    checkOut: userId => dispatch(checkOut(userId))
+    checkOut: userId => dispatch(checkOut(userId)),
+    addToCart: (userId, productId, qty) =>
+      dispatch(addToCart(userId, productId, qty))
   };
 };
 
