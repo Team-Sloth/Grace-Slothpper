@@ -108,17 +108,19 @@ router.delete('/cart/:userId', async (req, res, next) => {
 // Delete lineItem from cart
 router.delete('/cart/:userId/:productId', async (req, res, next) => {
   try {
-    const lineItem = await LineItem.findOne({
+    const [cartOrder, cartCreated] = await Order.findOrCreate({
       where: {
-        orderId: req.params.orderId,
-        productId: req.body.productId
+        userId: req.params.userId,
+        isCart: true
       }
     });
-    await lineItem.destroy({
+    const [lineItem, created] = await LineItem.findOrCreate({
       where: {
-        productId: +req.params.productId
+        orderId: cartOrder.id,
+        productId: req.params.productId
       }
     });
+    await lineItem.destroy();
     res.sendStatus(200);
   } catch (err) {
     next(err);
