@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {withRouter, Route, Switch} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {
+  AdminNav,
   Login,
   Signup,
   UserCart,
@@ -42,6 +43,7 @@ class Routes extends Component {
             <Route path="/cart" component={UserCart} />
             {isAdmin && (
               <Switch>
+                <Route exact path="/admin" component={AdminNav} />
                 <Route exact path="/users" component={Users} />
               </Switch>
             )}
