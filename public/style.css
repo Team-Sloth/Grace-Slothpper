@@ -1,18 +1,39 @@
-body {
-  font-family: sans-serif;
+* {
+  box-sizing: border-box;
+  font-family: arial, sans-serif;
 }
 
-a {
+body {
+  background: #ffffff;
+  padding: 0;
+  margin: 0;
+}
+
+div {
+  margin: 0;
+}
+
+nav {
+  align-items: center;
+  background-color: black;
+  color: #c0c0c0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  height: 80px;
+  text-decoration: none;
+  margin: 0;
+}
+
+nav a {
+  color: #e1c8a3;
+  margin: 1em;
+  display: inline-block;
   text-decoration: none;
 }
 
 label {
   display: block;
-}
-
-nav a {
-  display: inline-block;
-  margin: 1em;
 }
 
 form div {
