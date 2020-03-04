@@ -50,6 +50,16 @@ router.get('/:userId', async (req, res, next) => {
 });
 
 // Change quantity of item in cart
+// restful APIs representational state transfer - API architecture
+// focus on restful API practices
+// naming convention is not clear: does not represent what it does
+// changes in cart /cart is more representative
+// find or create for cart because you do not know if it exists
+// add something to cart is add a new row to a table
+// add products in many to many will add twice the lineItem
+// if you do one to many then use set product bc i am changing an id
+// user/id/cart
+// cart/cartId
 router.post('/:userId', async (req, res, next) => {
   try {
     const [product, created] = await Cart.findOrCreate({
