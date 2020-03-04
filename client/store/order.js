@@ -86,7 +86,7 @@ export default function(state = [], action) {
     case CHECKED_OUT:
       return [];
     case DELETED_LINE_ITEM:
-      return state.filter(item => item.id !== action.id);
+      return state.filter(item => item.id !== action.productId);
     default:
       return state;
   }
