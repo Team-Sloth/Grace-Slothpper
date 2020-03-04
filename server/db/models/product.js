@@ -5,7 +5,9 @@ const Product = db.define('product', {
   name: {
     type: Sequelize.STRING,
     allowNull: false,
-    notEmpty: true
+    validate: {
+      notEmpty: true
+    }
   },
   sku: {
     type: Sequelize.BIGINT,
@@ -17,17 +19,21 @@ const Product = db.define('product', {
     allowNull: false,
     defaultValue: 'This is a description for this sloth product!'
   },
-  quantity: {
+  stock: {
     type: Sequelize.INTEGER,
-    defaultValue: 0
+    defaultValue: 0,
+    validate: {
+      min: 0
+    }
   },
   price: {
-    type: Sequelize.FLOAT,
+    type: Sequelize.INTEGER,
     allowNull: false,
-    defaultValue: 1.99
+    defaultValue: 199
   },
+  // add utility method to dive by 100
   salePrice: {
-    type: Sequelize.FLOAT,
+    type: Sequelize.INTEGER,
     defaultValue: null
   },
   imageUrl: {
