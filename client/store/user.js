@@ -5,7 +5,6 @@ import history from '../history';
  * ACTION TYPES
  */
 const GET_USER = 'GET_USER';
-const GOT_SINGLE_USER = 'GET_SINGLE_USER';
 const REMOVE_USER = 'REMOVE_USER';
 
 /**
@@ -17,7 +16,6 @@ const defaultUser = {};
  * ACTION CREATORS
  */
 const getUser = user => ({type: GET_USER, user});
-const gotSingleUser = user => ({type: GOT_SINGLE_USER, user});
 const removeUser = () => ({type: REMOVE_USER});
 
 /**
@@ -27,15 +25,6 @@ export const me = () => async dispatch => {
   try {
     const res = await axios.get('/auth/me');
     dispatch(getUser(res.data || defaultUser));
-  } catch (err) {
-    console.error(err);
-  }
-};
-
-export const getSingleUser = id => async dispatch => {
-  try {
-    const {data} = await axios.get(`/api/users/${id}`);
-    dispatch(gotSingleUser(data));
   } catch (err) {
     console.error(err);
   }
@@ -84,8 +73,6 @@ export const logout = () => async dispatch => {
 export default function(state = defaultUser, action) {
   switch (action.type) {
     case GET_USER:
-      return action.user;
-    case GOT_SINGLE_USER:
       return action.user;
     case REMOVE_USER:
       return defaultUser;
