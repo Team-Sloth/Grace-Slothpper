@@ -4,8 +4,8 @@ const db = require('../db');
 const Product = db.define('product', {
   name: {
     type: Sequelize.STRING,
-    allowNull: false,
-    notEmpty: true
+    allowNull: false
+    // validate notEmpty: true
   },
   sku: {
     type: Sequelize.BIGINT,
@@ -19,15 +19,18 @@ const Product = db.define('product', {
   },
   quantity: {
     type: Sequelize.INTEGER,
-    defaultValue: 0
+    // add validation, cannot be less than 0
+    defaultValue: 1
   },
   price: {
-    type: Sequelize.FLOAT,
+    type: Sequelize.INTEGER,
+    // keep price as integer, store as cents instead of dollars, it makes math easier
     allowNull: false,
-    defaultValue: 1.99
+    defaultValue: 199
   },
+  // add utility method to dive by 100
   salePrice: {
-    type: Sequelize.FLOAT,
+    type: Sequelize.INTEGER,
     defaultValue: null
   },
   imageUrl: {
