@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {getCart, checkOut} from '../store';
+import {getCart, checkOut, deleteLineItem} from '../store';
 
 /**
  * COMPONENT
@@ -27,6 +27,14 @@ class UserCart extends React.Component {
                     100 *
                     p.lineItem.quantity}
                 </p>
+                <button
+                  onClick={() =>
+                    this.props.deleteLineItem(this.props.user.id, p.id)
+                  }
+                >
+                  {' '}
+                  DELETE PRODUCT X{' '}
+                </button>
               </div>
             ))
           : ''}
@@ -51,7 +59,9 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     getCart: userId => dispatch(getCart(userId)),
-    checkOut: userId => dispatch(checkOut(userId))
+    checkOut: userId => dispatch(checkOut(userId)),
+    deleteLineItem: (userId, productId) =>
+      dispatch(deleteLineItem(userId, productId))
   };
 };
 
