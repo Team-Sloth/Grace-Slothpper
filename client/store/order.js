@@ -90,7 +90,9 @@ export default function(state = [], action) {
     case ADDED_TO_CART: {
       const stateCopy = [...state];
       const product = stateCopy.find(p => p.id === action.lineItem.productId);
-      product.lineItem = action.lineItem;
+      if (product) {
+        product.lineItem = action.lineItem;
+      }
       return stateCopy;
     }
     default:
