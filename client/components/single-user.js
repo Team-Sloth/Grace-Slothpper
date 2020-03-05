@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {getSingleUser, updateSingleUser} from '../store';
-
+import SingleUserCartTable from './SingleUserCartTable';
 /**
  * COMPONENT
  */
@@ -68,7 +68,7 @@ class SingleUser extends React.Component {
                 />
               </label>
             </div>
-
+            <SingleUserCartTable cart={this.props.singleUser.cart} />
             <button type="submit">Update This User</button>
           </div>
         )}

@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const validateAdmin = require('../middleware');
-const {User, Order} = require('../db/models');
+const {User, Order, Product, LineItem} = require('../db/models');
 module.exports = router;
 
 router.get('/', validateAdmin, async (req, res, next) => {
@@ -31,7 +31,15 @@ router.get('/:userId', async (req, res, next) => {
         }
       ]
     });
-    res.json(user);
+    const [cartOrder, cartCreated] = await Order.findOrCreate({
+      where: {
+        userId: userId,
+        isCart: true
+      }
+    });
+    const products = await cartOrder.getProducts({raw: true});
+    const userWithCart = {...user.dataValues, cart: products};
+    res.json(userWithCart);
   } catch (err) {
     next(err);
   }
