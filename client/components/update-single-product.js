@@ -9,22 +9,30 @@ class EditSingleProduct extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: this.props.product.name,
-      description: this.props.product.description,
-      price: this.props.product.price,
-      stock: this.props.product.stock
+      id: 0,
+      name: '',
+      description: '',
+      price: 0,
+      stock: 0
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  // async componentDidMount() {
-  //   await this.props.getSingleProduct(this.props.match.params.id);
-  //   this.setState({
-  //     name: this.props.product.name,
-  //     description: this.props.product.description,
-  //   });
-  // }
+  componentDidMount() {
+    console.log(
+      'THIS IS THE CURRENT PROP ID in COMPONENTDIDMOUNT',
+      this.props.product.id
+    );
+
+    this.setState({
+      id: this.props.product.id,
+      name: this.props.product.name,
+      description: this.props.product.description,
+      price: this.props.product.price,
+      stock: this.props.product.stock
+    });
+  }
 
   handleChange(event) {
     this.setState({
@@ -33,12 +41,20 @@ class EditSingleProduct extends React.Component {
   }
 
   handleSubmit(event) {
-    const id = this.props.product.id;
     event.preventDefault();
-    this.props.updateSingleProduct(id, this.state);
+    console.log('STATE!!', this.state);
+    this.props.updateSingleProduct(this.state);
+    this.setState({
+      id: this.props.product.id,
+      name: this.props.product.name,
+      description: this.props.product.description,
+      price: this.props.product.price,
+      stock: this.props.product.stock
+    });
   }
 
   render() {
+    console.log('THIS IS THE CURRENT PROPS in RENDER', this.props);
     return (
       <form onSubmit={this.handleSubmit}>
         {this.props.product && (
@@ -112,9 +128,8 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    getSingleProduct: id => dispatch(getSingleProduct(id)),
-    updateSingleProduct: (id, product) =>
-      dispatch(updateSingleProduct(id, product))
+    // getSingleProduct: id => dispatch(getSingleProduct(id)),
+    updateSingleProduct: product => dispatch(updateSingleProduct(product))
   };
 };
 
