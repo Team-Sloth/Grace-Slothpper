@@ -48,8 +48,8 @@ router.get('/:userId', async (req, res, next) => {
 
 // UPDATE Line item from Admin view
 router.put('/:userId/:productId', validateAdmin, async (req, res, next) => {
-  const userId = req.params.userId;
-  const productId = req.params.productId;
+  const userId = +req.params.userId;
+  const productId = +req.params.productId;
   try {
     const [cartOrder, cartCreated] = await Order.findOrCreate({
       where: {
@@ -63,6 +63,7 @@ router.put('/:userId/:productId', validateAdmin, async (req, res, next) => {
       }
     });
     lineItem.quantity = req.body.quantity;
+    await lineItem.save();
     res.json(lineItem);
   } catch (err) {
     next(err);

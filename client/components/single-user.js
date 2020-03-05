@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {getSingleUser, updateSingleUser} from '../store';
+import {getSingleUser, updateSingleUser, updateUserLineItem} from '../store';
 import SingleUserCartTable from './SingleUserCartTable';
 /**
  * COMPONENT
@@ -11,10 +11,12 @@ class SingleUser extends React.Component {
     this.state = {
       firstName: '',
       lastName: '',
-      email: ''
+      email: '',
+      quantity: ''
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.itemUpdate = this.itemUpdate.bind(this);
   }
 
   async componentDidMount() {
@@ -36,6 +38,17 @@ class SingleUser extends React.Component {
     const id = this.props.match.params.id;
     event.preventDefault();
     this.props.updateSingleUser(id, this.state);
+  }
+
+  itemUpdate(lineItem) {
+    console.log('this is item', lineItem);
+    const productId = lineItem['lineItem.productId'];
+    lineItem.quantity = this.state.quantity;
+    this.props.updateUserLineItem(
+      this.props.singleUser.id,
+      productId,
+      lineItem
+    );
   }
 
   render() {
@@ -69,7 +82,11 @@ class SingleUser extends React.Component {
               </label>
             </div>
             <button type="submit">Update This User</button>
-            <SingleUserCartTable cart={this.props.singleUser.cart} />
+            <SingleUserCartTable
+              cart={this.props.singleUser.cart}
+              itemUpdate={this.itemUpdate}
+              handleChange={this.handleChange}
+            />
           </div>
         )}
       </form>
@@ -89,7 +106,9 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     getSingleUser: id => dispatch(getSingleUser(id)),
-    updateSingleUser: (id, user) => dispatch(updateSingleUser(id, user))
+    updateSingleUser: (id, user) => dispatch(updateSingleUser(id, user)),
+    updateUserLineItem: (userId, productId, lineItem) =>
+      dispatch(updateUserLineItem(userId, productId, lineItem))
   };
 };
 

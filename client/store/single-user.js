@@ -51,11 +51,9 @@ export const updateUserLineItem = (
   lineItem
 ) => async dispatch => {
   try {
-    const {data} = await axios.put(
-      `/api/users/${userId}/${productId}`,
-      lineItem
-    );
-    dispatch(updateUserLineItem(data));
+    const url = `/api/users/${userId}/${productId}`;
+    const {data} = await axios.put(url, lineItem);
+    dispatch(updatedUserLineItem(data));
   } catch (err) {
     console.error(err);
   }
