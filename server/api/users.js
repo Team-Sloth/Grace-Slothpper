@@ -1,38 +1,14 @@
 const router = require('express').Router();
 const validateAdmin = require('../middleware');
-const {User, Order} = require('../db/models');
+const {User, Order, Product, LineItem} = require('../db/models');
 module.exports = router;
 
 router.get('/', validateAdmin, async (req, res, next) => {
   try {
-    if (!req.user.isAdmin) {
-      const adminErr = new Error('Restricted');
-      adminErr.status = 405;
-      next(adminErr);
-      return;
-    }
     const users = await User.findAll({
-      // explicitly select only the id and email fields - even though
-      // users' passwords are encrypted, it won't help if we just
-      // send everything to anyone who asks!
       attributes: ['id', 'email', 'firstName', 'lastName']
     });
     res.json(users);
-  } catch (err) {
-    next(err);
-  }
-});
-
-router.get('/:userId/profile', async (req, res, next) => {
-  const userId = req.params.userId;
-  try {
-    if (!req.user || (!req.user.isAdmin && req.user.id !== userId)) {
-      const adminErr = new Error('Restricted');
-      adminErr.status = 405;
-      return next(adminErr);
-    }
-    const user = await User.findByPk(userId);
-    res.json(user);
   } catch (err) {
     next(err);
   }
@@ -55,7 +31,31 @@ router.get('/:userId', async (req, res, next) => {
         }
       ]
     });
-    res.json(user);
+    const [cartOrder, cartCreated] = await Order.findOrCreate({
+      where: {
+        userId: userId,
+        isCart: true
+      }
+    });
+    const products = await cartOrder.getProducts({raw: true});
+    const userWithCart = {...user.dataValues, cart: products};
+    res.json(userWithCart);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.put('/:userId', validateAdmin, async (req, res, next) => {
+  try {
+    const userId = req.params.userId;
+    const {email, firstName, lastName} = req.body;
+    const userData = {email, firstName, lastName};
+    const [count, user] = await User.update(userData, {
+      where: {id: userId},
+      returning: true
+    });
+    const [foundUser] = user;
+    res.json(foundUser);
   } catch (err) {
     next(err);
   }
@@ -72,4 +72,3 @@ router.get('/:userId', async (req, res, next) => {
 // if you do one to many then use set product bc i am changing an id
 // user/id/cart
 // cart/cartId
-
