@@ -14,7 +14,7 @@ class UserCart extends React.Component {
     const {cart, user} = this.props;
     return (
       <div>
-        <h3>{user.firstName}'s Cart:</h3>
+        <h3>{user.firstName ? user.firstName : 'Guest'}'s Cart:</h3>
         {cart
           ? cart.map(p => (
               <div key={p.id}>
@@ -28,10 +28,10 @@ class UserCart extends React.Component {
                     p.lineItem.quantity}
                 </p>
                 <button
-                  onClick={() =>
-                    this.props.deleteLineItem(this.props.user.id, p.id)
-                  }
-                >DELETE PRODUCT X</button>
+                  onClick={() => this.props.deleteLineItem(user.id, p.id)}
+                >
+                  DELETE PRODUCT X
+                </button>
                 <button onClick={() => this.props.addToCart(user.id, p.id, 1)}>
                   +1
                 </button>
