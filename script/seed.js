@@ -68,7 +68,7 @@ async function seed() {
       name: 'Sloth Leaf',
       imageUrl: '/img/leaf.jpg',
       description:
-        'Please buy this delcious Leaf for your sloth friend! It is green and picked fresh from a local home grown tree. Makes for a meal that will have you saying, "Bon Appetit!!"',
+        'Please buy this delicious Leaf for your sloth friend! It is green and picked fresh from a local home grown tree. Makes for a meal that will have you saying, "Bon Appetit!!"',
       price: 40,
       stock: 82
     }),
@@ -87,6 +87,239 @@ async function seed() {
         'The sloths are back and slower than ever! Catch this classic featuring Slothacris on DVD while supplies last -- or attend one of our live showings every Thursday morning!',
       price: 2699,
       stock: 50
+    }),
+    Product.create({
+      name: 'Idle Sloth Door Hanger',
+      imageUrl: '/img/idleSloth.jpg',
+      description: 'Ideal for your room, and office. Tough, Durable Plastic!',
+      price: 299,
+      stock: 199
+    }),
+    Product.create({
+      name: 'Warmies Sloth Hugs',
+      imageUrl: '/img/warmies-sloth-hugs.png',
+      description:
+        'Fun, fully microwavable hugging sloths made from luxurious soft plush. Simply warm in a microwave to soothe, relax & comfort.',
+      price: 232,
+      stock: 120
+    }),
+    Product.create({
+      name: 'Hugging Stuffed Sloth Bracelets',
+      imageUrl: '/img/stuffed-sloth-bracelet.png',
+      description:
+        'Sloths may be the slowest animals around, but your love for these plush pals will grow oh-so-fast! Wild additions to kids toys, giveaways and party favors, these stuffed animals are ready to give you a hug. When it comes to zoo animals, sloths are one that kids of all ages adore, and when made as stuffed ready-to-hug toys, they are even more irresistible! Includes bendable metal band arms. Plush. 9"',
+      price: 112,
+      stock: 100
+    }),
+    Product.create({
+      name: 'Taco Bout this Sleepy Sloth Dog Toy',
+      imageUrl: '/img/taco.png',
+      description:
+        'All your furry friend will want to do is taco ‘bout his new Pet Shop by Fringe Studio toy. Taco ‘Bout this Sleepy Sloth Dog Toy not only features a filled taco with a mustache and a jolly face, but it also has a fluffy sleepy sloth on top who just doesn’t want to let go! Even though this one-of-a-kind plush is undeniably adorable, it’s what’s on the inside that really counts. Your canine companion will love discovering the two extra-loud internal squeaker that are sure to tempt him to play an exciting game of fetch or catch. And although this novelty toy may not be designed for aggressive chewers, it makes the paw-fect pal for any sidekick who loves a good snuggle!',
+      price: 321,
+      stock: 20
+    }),
+    Product.create({
+      name: 'Advice From A Sloth',
+      imageUrl: '/img/advice.png',
+      description:
+        'Kickstart the new year and achieve your goals with this advice from a sloth',
+      price: 500,
+      stock: 200
+    }),
+    Product.create({
+      name: 'Heep',
+      imageUrl: '/img/Heep-Large-Front_540x.png',
+      description:
+        'Heep is very lazy. His tiny head doesn’t believe in words like hurry. A tiny headed sloth that is sure to bring big smiles. Heep is strong on the inside, yet soft and cuddly on the outside—a mellow mate for anyone ages 3+! Whether you buy him funnel cake, take him on a treasure hunt, or bring him to the arcade — you are sure to have a ton of tiny headed fun.',
+      price: 789,
+      stock: 300
+    }),
+    Product.create({
+      name: 'Sloth Lazy Just Do It Later Hoodie',
+      imageUrl: '/img/sloth-lazy-just-do-it-later-hoodie.jpg',
+      description:
+        'Do It Later Funny Sleepy Sloth For Lazy Sloth Lovers .This Procrastination Sloth t-shirt makes a great gift for lazy people, animal lovers, sleeping, Pet lovers, or people that love coffee.',
+      price: 2800,
+      stock: 50
+    }),
+    Product.create({
+      name: 'Sloth Lazy Just Do It Later T-Shirt',
+      imageUrl: '/img/just-do-it-later.jpg',
+      description:
+        'Do It Later Funny Sloth T-Shirt For Lazy Sloth Lovers .This Procrastination Sloth t-shirt makes a great gift for lazy people, animal lovers, sleeping, Pet lovers, or people that love coffee.',
+      price: 2800,
+      stock: 50
+    }),
+    Product.create({
+      name: 'Sloth Lazy Cant Someone Else Do It T-Shirt',
+      imageUrl: '/img/can-someone-else-do-it.jpg',
+      description:
+        'Can t Someone Else Do It Sloth T-Shirt For Lazy Sloth Lovers .This Procrastination Sloth t-shirt makes a great gift for lazy people, animal lovers, sleeping, Pet lovers, or people that love coffee.',
+      price: 2750,
+      stock: 70
+    }),
+    Product.create({
+      name: 'Black Cute Sloths Compression Socks',
+      imageUrl: '/img/compression-socks.png',
+      description:
+        'We re crazy and crazy about keeping your feet and legs in great condition to go the distance while looking stylish in our true graduated compression socks and sleeves!',
+      price: 1540,
+      stock: 60
+    }),
+    Product.create({
+      name: 'Sloth Metal Street Sign',
+      imageUrl: '/img/ground-sloth-drive.jpg',
+      description:
+        'Ground Sloth lovers check out this awesome street sign! This will make the perfect piece for any Ground Sloth fan. Made of premium aluminum it will stand the test of time. This sign will look great in any room, home den, cave, or office!',
+      price: 3200,
+      stock: 90
+    }),
+    Product.create({
+      name: 'Stylish Sloth Mens Shirt',
+      imageUrl: '/img/stylish-t.jpg',
+      description:
+        'This debonair sloth is looking fine in his three piece suit. It only took him 7 hours to get dressed this morning.',
+      price: 4500,
+      stock: 190
+    }),
+    Product.create({
+      name: 'Astronaut Sloth White T-Shirt',
+      imageUrl: '/img/astronaut-sloth.png',
+      description:
+        'One small step for a sloth, one giant leap for slothkind. This lightweight white tee features an image of perhaps the slowest animal on earth or in space - the sloth!',
+      price: 4550,
+      stock: 130
+    }),
+    Product.create({
+      name: 'Don t Rush Me T-Shirt',
+      imageUrl: '/img/rush.png',
+      description: 'Get ahead with this awesome Don t Rush Me T-Shirt',
+      price: 4350,
+      stock: 100
+    }),
+    Product.create({
+      name: 'Official Scrabble - Limited Edition!',
+      imageUrl: '/img/scrabble.png',
+      description:
+        'Limited edition of the official Scrabble, brought to you by Hasbro. Manufactured in China.',
+      price: 7650,
+      stock: 20
+    }),
+    Product.create({
+      name: 'Corona Virus Outbreak Sticker Collection',
+      imageUrl: '/img/stickers.png',
+      description: 'Corona Virus Sticker Collection.',
+      price: 450,
+      stock: 10
+    }),
+    Product.create({
+      name: 'Corona Virus W ill Save The Planet Tote',
+      imageUrl: '/img/tote1.png',
+      description:
+        'Cool motivation T-Shirt for corona patient and Researchers Doctors motivation to resist and find a cure fore corona virus.',
+      price: 1500,
+      stock: 50
+    }),
+    Product.create({
+      name: 'Corona Virus Made By Humans Tote',
+      imageUrl: '/img/humans.png',
+      description:
+        'Cool motivation T-Shirt for humans to showcase their achievements',
+      price: 4450,
+      stock: 20
+    }),
+    Product.create({
+      name: 'I Don t Care Sloth Coffe Mug',
+      imageUrl: '/img/i-dont-care.jpg',
+      description:
+        'Keep it real during your next corporate gifting splurge. Set the tone and get the message across that you like to be lazy and sloth-like and you DGAF what others think!',
+      price: 170,
+      stock: 90
+    }),
+    Product.create({
+      name: 'Sloth BAE T-Shirt',
+      imageUrl: '/img/bae-t.png',
+      description: 'This T-Shirt needs no description.',
+      price: 2500,
+      stock: 100
+    }),
+    Product.create({
+      name: 'Party Animal Anniversary Card',
+      imageUrl: '/img/anniversary-card.png',
+      description: 'The perfect card for your 1-year wedding anniversary!',
+      price: 170,
+      stock: 90
+    }),
+    Product.create({
+      name: 'Enlighten Me',
+      imageUrl: '/img/light.png',
+      description: 'Enlighten Me',
+      price: 5470,
+      stock: 20
+    }),
+    Product.create({
+      name: 'Do not want to do list note pad',
+      imageUrl: '/img/list.jpg',
+      description:
+        'Get started on the wrong foot with this Do NOT want TODO list.',
+      price: 127,
+      stock: 40
+    }),
+    Product.create({
+      name: 'Sloth yoga class',
+      imageUrl: '/img/yoga.jpg',
+      description: 'Hang in there. Practice your downward sloth.',
+      price: 127,
+      stock: 40
+    }),
+    Product.create({
+      name: 'Sloth Rocket Moon trip',
+      imageUrl: '/img/rocket.png',
+      description:
+        'Beat Elon Musk to the moon with this exclusive one way trip.',
+      price: 15700,
+      stock: 2
+    }),
+    Product.create({
+      name: 'Zootopia Movie Scene: Sloths Run the DMV',
+      imageUrl: '/img/zootopia.png',
+      description:
+        'Get this Zootopia movie scene on repeat. Two hours that will calm your nerves: Sloths Run the DMV',
+      price: 1500,
+      stock: 400
+    }),
+    Product.create({
+      name: 'How to protect yourself from Corona Virus',
+      imageUrl: '/img/inspiration.jpg',
+      description:
+        'Learn how-to protect yourself from Corona Virus with this must-have book',
+      price: 1790,
+      stock: 30
+    }),
+    Product.create({
+      name: 'Nirvana Nerversloth Iconic Album',
+      imageUrl: '/img/neversloth.png',
+      description:
+        'Because sloths make everything better...Nirvana Nerversloth Iconic Album',
+      price: 2000,
+      stock: 40
+    }),
+    Product.create({
+      name: 'David Bowie Alladin Sloth Album',
+      imageUrl: '/img/david.png',
+      description:
+        'Because sloths make everything better...David Bowie Alladin Sloth Album',
+      price: 2000,
+      stock: 40
+    }),
+    Product.create({
+      name: 'Beatles Lonely Sloths Album',
+      imageUrl: '/img/beatles.png',
+      description:
+        'Because sloths make everything better...Beatles Lonely Sloths Album',
+      price: 2000,
+      stock: 40
     })
   ]);
 
