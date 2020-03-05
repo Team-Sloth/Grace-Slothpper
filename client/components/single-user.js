@@ -68,8 +68,8 @@ class SingleUser extends React.Component {
                 />
               </label>
             </div>
-            <SingleUserCartTable cart={this.props.singleUser.cart} />
             <button type="submit">Update This User</button>
+            <SingleUserCartTable cart={this.props.singleUser.cart} />
           </div>
         )}
       </form>
