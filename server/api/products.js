@@ -21,13 +21,8 @@ router.get('/:productId', async (req, res, next) => {
   }
 });
 
-router.post('/:productId', async (req, res, next) => {
+router.post('/:productId', validateAdmin, async (req, res, next) => {
   try {
-    if (!req.user || !req.user.isAdmin) {
-      const adminErr = new Error('Restricted');
-      adminErr.status = 405;
-      return next(adminErr);
-    }
     const [count, product] = await Product.update(req.body, {
       where: {id: req.params.productId},
       returning: true
