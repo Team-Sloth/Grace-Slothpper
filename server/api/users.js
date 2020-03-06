@@ -22,7 +22,7 @@ router.get('/', validateAdmin, async (req, res, next) => {
 }
 */
 // GET User profile AND Cart for Admin view
-router.get('/:userId', async (req, res, next) => {
+router.get('/:userId', validateUser, async (req, res, next) => {
   const userId = req.params.userId;
   try {
     const user = await User.findByPk(userId, {
