@@ -217,7 +217,7 @@ async function seed() {
       name: 'Corona Virus W ill Save The Planet Tote',
       imageUrl: '/img/tote1.png',
       description:
-        'Cool motivation T-Shirt for corona patient and Researchers Doctors motivation to resist and find a cure fore corona virus.',
+        'Cool motivational T-Shirt for corona patient and Researchers Doctors motivation to resist and find a cure fore corona virus.',
       price: 1500,
       stock: 50
     }),
@@ -304,6 +304,102 @@ async function seed() {
         'Because sloths make everything better...Nirvana Nerversloth Iconic Album',
       price: 2000,
       stock: 40
+    }),
+    Product.create({
+      name: 'The Sloths - Is this it - RCA Records',
+      imageUrl: '/img/thesloths-isthisit-rcarecords.png',
+      description: 'Because sloths make everything better...RCA Records Album',
+      price: 2100,
+      stock: 20
+    }),
+    Product.create({
+      name: 'Apple Records',
+      imageUrl: '/img/appple-records-album.png',
+      description:
+        'Because sloths make everything better...Apple Records Album',
+      price: 2100,
+      stock: 20
+    }),
+    Product.create({
+      name: 'Sloth this way',
+      imageUrl: '/img/sloth-this-way-album.png',
+      description:
+        'Because sloths make everything better...Sloth this way Album',
+      price: 2150,
+      stock: 20
+    }),
+    Product.create({
+      name: 'The Freewheelin - Sloth Dylan',
+      imageUrl: '/img/the-freewheelinslothdylan-album.png',
+      description: 'Because sloths make everything better...Sloth Dylan Album',
+      price: 2180,
+      stock: 20
+    }),
+    Product.create({
+      name: 'SLOTH',
+      imageUrl: '/img/SLOTH-Island-records-album.png',
+      description:
+        'Because sloths make everything better...Sloth Island Records Album',
+      price: 2190,
+      stock: 20
+    }),
+    Product.create({
+      name: 'Don t eat me iPhone Case',
+      imageUrl: '/img/bat.png',
+      description: 'Don t eat me, bat may cause corona virus',
+      price: 1500,
+      stock: 30
+    }),
+    Product.create({
+      name: 'Travel Mug',
+      imageUrl: '/img/cough-travel-mug.png',
+      description:
+        'Get ready to travel abroad, specifically to China, Japan, and Italy! I know it is tough but please don t cough MUG.',
+      price: 2200,
+      stock: 40
+    }),
+    Product.create({
+      name: 'Iconic Corona Beer MEME',
+      imageUrl: '/img/coronabeer.png',
+      description:
+        'Download this iconic MEME. Use as a screen saver to calm your nerves throughout the day while you try to get ANY work done...',
+      price: 400,
+      stock: 1000
+    }),
+    Product.create({
+      name: 'Sloth Corona Sticker',
+      imageUrl: '/img/sloth-sticker.png',
+      description: 'Who does not like stickers?',
+      price: 100,
+      stock: 1000
+    }),
+    Product.create({
+      name: 'Monkey Corona Sticker',
+      imageUrl: '/img/monkey-sticker.png',
+      description: 'Who does not like stickers?',
+      price: 100,
+      stock: 1000
+    }),
+    Product.create({
+      name: 'Corona Virus Monkey Protection Socks',
+      imageUrl: '/img/monkey-socks.png',
+      description: 'A must have to protect your feet from Corona Virus',
+      price: 500,
+      stock: 700
+    }),
+    Product.create({
+      name: 'Prevent Outbreaks iPhone Case',
+      imageUrl: '/img/prevent-outbreaks-case.png',
+      description: 'Help spread the word.',
+      price: 1700,
+      stock: 500
+    }),
+    Product.create({
+      name: 'Corona w Lime',
+      imageUrl: '/img/coronavirus-w-lyme.jpg',
+      description: 'Grab a bear and relax.',
+      price: 1700,
+      stock: 500
     }),
     Product.create({
       name: 'David Bowie Alladin Sloth Album',
