@@ -24,14 +24,14 @@ class Products extends React.Component {
             </div>
           )}
         </div>
-        <div>
+        <div className="product-list">
           {products.map(p => (
             <Link to={`/products/${p.id}`} key={p.id}>
               <div>
                 <h3>
                   {p.name} &mdash; ${p.price / 100}
                 </h3>
-                <img src={p.imageUrl} />
+                <img src={p.imageUrl} height={250} />
                 <p>{p.description}</p>
                 <p>In Stock: {p.stock}</p>
               </div>
