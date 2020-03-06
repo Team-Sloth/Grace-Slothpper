@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {getProducts} from '../store';
 import {Link} from 'react-router-dom';
+import AddProductForm from '../components/add-product.js';
 
 /**
  * COMPONENT
@@ -13,20 +14,30 @@ class Products extends React.Component {
   }
   render() {
     const {products} = this.props;
+
     return (
       <div>
-        {products.map(p => (
-          <Link to={`/products/${p.id}`} key={p.id}>
+        <div>
+          {this.props.isAdmin && (
             <div>
-              <h3>
-                {p.name} &mdash; ${p.price / 100}
-              </h3>
-              <img src={p.imageUrl} />
-              <p>{p.description}</p>
-              <p>In Stock: {p.stock}</p>
+              <AddProductForm />
             </div>
-          </Link>
-        ))}
+          )}
+        </div>
+        <div>
+          {products.map(p => (
+            <Link to={`/products/${p.id}`} key={p.id}>
+              <div>
+                <h3>
+                  {p.name} &mdash; ${p.price / 100}
+                </h3>
+                <img src={p.imageUrl} />
+                <p>{p.description}</p>
+                <p>In Stock: {p.stock}</p>
+              </div>
+            </Link>
+          ))}
+        </div>
       </div>
     );
   }
@@ -37,7 +48,8 @@ class Products extends React.Component {
  */
 const mapState = state => {
   return {
-    products: state.products
+    products: state.products,
+    isAdmin: state.user.isAdmin
   };
 };
 const mapDispatch = dispatch => {

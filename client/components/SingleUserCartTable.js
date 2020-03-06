@@ -1,7 +1,21 @@
 import React from 'react';
 
 const SingleUserCartTable = props => {
-  console.log(props);
+  // handleSubmit(event) {
+  //   const id = this.props.match.params.id;
+  //   event.preventDefault();
+  //   this.props.updateSingleUser(id, this.state);
+  // }
+  const handleItemUpdate = (evt, item) => {
+    evt.preventDefault();
+    props.itemUpdate(item);
+  };
+
+  const handleQuantityChange = evt => {
+    props.handleChange(evt);
+  };
+
+  //console.log(props);
   return (
     <table>
       <thead>
@@ -20,13 +34,25 @@ const SingleUserCartTable = props => {
             <tr key={item.id}>
               <td>{item.name}</td>
               <td>{item.price / 100}</td>
-              <td>{item['lineItem.quantity']}</td>
+              <td>
+                <label htmlFor="quantity">
+                  <small>quantity</small>
+                </label>
+                <input
+                  name="quantity"
+                  placeholder={item['lineItem.quantity']}
+                  type="number"
+                  onChange={evt => handleQuantityChange(evt)}
+                />
+              </td>
               <td>{item.price / 100 * item['lineItem.quantity']}</td>
               <td>
                 <button>Remove Item</button>
               </td>
               <td>
-                <button>Update</button>
+                <button onClick={evt => handleItemUpdate(evt, item)}>
+                  Update
+                </button>
               </td>
             </tr>
           ))}

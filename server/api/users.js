@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const validateAdmin = require('../middleware');
+const {validateAdmin, validateUser} = require('../middleware');
 const {User, Order, Product, LineItem} = require('../db/models');
 module.exports = router;
 
@@ -21,7 +21,8 @@ router.get('/', validateAdmin, async (req, res, next) => {
   ]
 }
 */
-router.get('/:userId', async (req, res, next) => {
+// GET User profile AND Cart for Admin view
+router.get('/:userId', validateUser, async (req, res, next) => {
   const userId = req.params.userId;
   try {
     const user = await User.findByPk(userId, {
@@ -45,6 +46,30 @@ router.get('/:userId', async (req, res, next) => {
   }
 });
 
+// UPDATE Line item from Admin view
+router.put('/:userId/:productId', validateAdmin, async (req, res, next) => {
+  const userId = +req.params.userId;
+  const productId = +req.params.productId;
+  try {
+    const [cartOrder, cartCreated] = await Order.findOrCreate({
+      where: {
+        userId: userId,
+        isCart: true
+      }
+    });
+    const [lineItem, itemCreated] = await LineItem.findOrCreate({
+      where: {
+        orderId: cartOrder.id
+      }
+    });
+    lineItem.quantity = req.body.quantity;
+    await lineItem.save();
+    res.json(lineItem);
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.put('/:userId', validateAdmin, async (req, res, next) => {
   try {
     const userId = req.params.userId;
@@ -55,6 +80,14 @@ router.put('/:userId', validateAdmin, async (req, res, next) => {
       returning: true
     });
     const [foundUser] = user;
+    const [cartOrder, cartCreated] = await Order.findOrCreate({
+      where: {
+        userId: userId,
+        isCart: true
+      }
+    });
+    const products = await cartOrder.getProducts({raw: true});
+
     res.json(foundUser);
   } catch (err) {
     next(err);
