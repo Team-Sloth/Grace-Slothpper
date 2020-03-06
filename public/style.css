@@ -53,7 +53,8 @@ form div {
 
 .product-list-item {
   border: 1px solid black;
+  border-radius: 10px 10px;
+  width: 250px;
   margin: 0.6em;
   padding: 0.4em;
-  width: 45vw;
 }

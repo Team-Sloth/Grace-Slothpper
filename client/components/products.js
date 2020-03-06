@@ -26,16 +26,16 @@ class Products extends React.Component {
         </div>
         <div className="product-list">
           {products.map(p => (
-            <Link to={`/products/${p.id}`} key={p.id}>
-              <div>
+            <div className="product-list-item">
+              <Link to={`/products/${p.id}`} key={p.id}>
                 <h3>
                   {p.name} &mdash; ${p.price / 100}
                 </h3>
-                <img src={p.imageUrl} height={250} />
+                <img src={p.imageUrl} width="100%" />
                 <p>{p.description}</p>
                 <p>In Stock: {p.stock}</p>
-              </div>
-            </Link>
+              </Link>
+            </div>
           ))}
         </div>
       </div>
