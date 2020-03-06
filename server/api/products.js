@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const {Product} = require('../db/models');
-const validateAdmin = require('../middleware');
+const {validateAdmin, validateUser} = require('../middleware');
 module.exports = router;
 
 router.get('/', async (req, res, next) => {

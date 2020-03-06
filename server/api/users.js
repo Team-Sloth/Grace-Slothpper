@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const validateAdmin = require('../middleware');
+const {validateAdmin, validateUser} = require('../middleware');
 const {User, Order, Product, LineItem} = require('../db/models');
 module.exports = router;
 

@@ -1,15 +1,14 @@
 const router = require('express').Router();
 const {Order, Product, User, LineItem} = require('../db/models');
+const {
+  validateAdmin,
+  validateUser,
+  validateUserOrGuest
+} = require('../middleware');
 module.exports = router;
 
-router.get('/', async (req, res, next) => {
+router.get('/', validateAdmin, async (req, res, next) => {
   try {
-    if (!req.user.isAdmin) {
-      const adminErr = new Error('Restricted');
-      adminErr.status = 405;
-      next(adminErr);
-      return;
-    }
     const orders = await Order.findAll();
     res.json(orders);
   } catch (err) {
@@ -17,7 +16,7 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-router.get('/cart/:userId', async (req, res, next) => {
+router.get('/cart/:userId', validateUserOrGuest, async (req, res, next) => {
   try {
     if (req.params.userId === 'undefined') {
       if (!req.session.cart) {
@@ -41,14 +40,10 @@ router.get('/cart/:userId', async (req, res, next) => {
   }
 });
 
-router.get('/:orderId', async (req, res, next) => {
+router.get('/:orderId', validateAdmin, async (req, res, next) => {
   try {
     const order = await Order.findByPk(req.params.orderId, {
-      include: [
-        {
-          model: Product
-        }
-      ]
+      include: [{model: Product}]
     });
     res.json(order);
   } catch (err) {
@@ -57,7 +52,8 @@ router.get('/:orderId', async (req, res, next) => {
 });
 
 // Add items to cart
-router.put('/cart/:userId', async (req, res, next) => {
+router.put('/cart/:userId', validateUserOrGuest, async (req, res, next) => {
+  console.log('REQ BODY IN PUT is ', req.body);
   try {
     if (req.params.userId === 'undefined') {
       // guest cart
@@ -76,6 +72,7 @@ router.put('/cart/:userId', async (req, res, next) => {
       res.json(product.lineItem);
       return;
     }
+
     const [cartOrder, cartCreated] = await Order.findOrCreate({
       where: {
         userId: req.params.userId,
@@ -114,40 +111,45 @@ router.put('/:orderId', async (req, res, next) => {
 });
 
 // Delete lineItem from cart
-router.delete('/cart/:userId/:productId', async (req, res, next) => {
-  try {
-    if (req.params.userId === 'undefined') {
-      if (!req.session.cart) {
-        req.session.cart = [];
+router.delete(
+  '/cart/:userId/:productId',
+  validateUserOrGuest,
+  async (req, res, next) => {
+    try {
+      if (req.params.userId === 'undefined') {
+        if (!req.session.cart) {
+          req.session.cart = [];
+        }
+        const delIdx = req.session.cart.findIndex(
+          p => p.id === req.params.productId
+        );
+        req.session.cart.splice(delIdx, 1, 1);
+        res.sendStatus(200);
+        return;
       }
-      const delIdx = req.session.cart.findIndex(
-        p => p.id === req.params.productId
-      );
-      req.session.cart.splice(delIdx, 1, 1);
+      const [cartOrder, cartCreated] = await Order.findOrCreate({
+        where: {
+          userId: req.params.userId,
+          isCart: true
+        }
+      });
+      const [lineItem, created] = await LineItem.findOrCreate({
+        where: {
+          orderId: cartOrder.id,
+          productId: req.params.productId
+        }
+      });
+      await lineItem.destroy();
+      await lineItem.save();
       res.sendStatus(200);
-      return;
+    } catch (err) {
+      next(err);
     }
-    const [cartOrder, cartCreated] = await Order.findOrCreate({
-      where: {
-        userId: req.params.userId,
-        isCart: true
-      }
-    });
-    const [lineItem, created] = await LineItem.findOrCreate({
-      where: {
-        orderId: cartOrder.id,
-        productId: req.params.productId
-      }
-    });
-    await lineItem.destroy();
-    res.sendStatus(200);
-  } catch (err) {
-    next(err);
   }
-});
+);
 
 // Delete or reset cart post checkout
-router.delete('/cart/:userId', async (req, res, next) => {
+router.delete('/cart/:userId', validateUserOrGuest, async (req, res, next) => {
   try {
     if (req.params.userId === 'undefined') {
       if (!req.session.cart || req.session.cart.length === 0) {
