@@ -12,7 +12,6 @@ class SingleProduct extends React.Component {
     this.props.getSingleProduct(this.props.match.params.id);
   }
   render() {
-    console.log('THIS IS THE PRODUCT ID', this.props.product.id);
     const {product} = this.props;
 
     return (
@@ -34,7 +33,7 @@ class SingleProduct extends React.Component {
         </button>
 
         {/* { product.id && <UpdateProductForm product={product} />} */}
-        {product.id && <UpdateProductForm />}
+        {<UpdateProductForm />}
       </div>
     );
   }

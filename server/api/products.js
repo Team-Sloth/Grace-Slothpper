@@ -54,13 +54,10 @@ router.post('/', validateAdmin, async (req, res, next) => {
 });
 
 router.put('/:productId', validateAdmin, async (req, res, next) => {
-  const productId = req.params.productId;
   try {
-    const [count, product] = await Product.update(req.body, {
-      where: {id: productId},
-      returning: true
-    });
-    res.json(product);
+    const product = await Product.findByPk(req.params.productId);
+    const updated = await product.update(req.body);
+    res.json(updated);
   } catch (err) {
     next(err);
   }

@@ -20,11 +20,7 @@ class EditSingleProduct extends React.Component {
   }
 
   componentDidMount() {
-    console.log(
-      'THIS IS THE CURRENT PROP ID in COMPONENTDIDMOUNT',
-      this.props.product.id
-    );
-
+    this.props.getSingleProduct(this.props.product.id);
     this.setState({
       id: this.props.product.id,
       name: this.props.product.name,
@@ -42,7 +38,6 @@ class EditSingleProduct extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    console.log('STATE!!', this.state);
     this.props.updateSingleProduct(this.state);
     this.setState({
       id: this.props.product.id,
@@ -54,7 +49,8 @@ class EditSingleProduct extends React.Component {
   }
 
   render() {
-    console.log('THIS IS THE CURRENT PROPS in RENDER', this.props);
+    console.log('HERES MY CURRENT PROP:', this.props);
+
     return (
       <form onSubmit={this.handleSubmit}>
         {this.props.product && (
@@ -128,7 +124,7 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    // getSingleProduct: id => dispatch(getSingleProduct(id)),
+    getSingleProduct: id => dispatch(getSingleProduct(id)),
     updateSingleProduct: product => dispatch(updateSingleProduct(product))
   };
 };
