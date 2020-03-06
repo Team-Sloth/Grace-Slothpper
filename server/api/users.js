@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const validateAdmin = require('../middleware');
+const {validateAdmin, validateUser} = require('../middleware');
 const {User, Order, Product, LineItem} = require('../db/models');
 module.exports = router;
 
@@ -22,7 +22,7 @@ router.get('/', validateAdmin, async (req, res, next) => {
 }
 */
 // GET User profile AND Cart for Admin view
-router.get('/:userId', async (req, res, next) => {
+router.get('/:userId', validateUser, async (req, res, next) => {
   const userId = req.params.userId;
   try {
     const user = await User.findByPk(userId, {
