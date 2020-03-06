@@ -33,7 +33,7 @@ class SingleProduct extends React.Component {
         </button>
 
         {/* { product.id && <UpdateProductForm product={product} />} */}
-        {<UpdateProductForm />}
+        {product.id && <UpdateProductForm product={product} />}
       </div>
     );
   }
