@@ -361,8 +361,7 @@ async function seed() {
     Product.create({
       name: 'Iconic Corona Beer MEME',
       imageUrl: '/img/coronabeer.png',
-      description:
-        'Download this iconic MEME. Use as a screen saver to calm your nerves throughout the day while you try to get ANY work done...',
+      description: 'Download this iconic MEME to save as a screen saver.',
       price: 400,
       stock: 1000
     }),
