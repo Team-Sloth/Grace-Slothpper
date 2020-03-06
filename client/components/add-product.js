@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-
 import {addProduct} from '../store/products';
 
-class DiscProductForm extends Component {
+class AddProductForm extends Component {
   constructor() {
     super();
     this.state = {
@@ -107,7 +106,7 @@ class DiscProductForm extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  addProduct: project => dispatch(addProduct(project))
+  addProduct: product => dispatch(addProduct(product))
 });
 
-export default connect(null, mapDispatchToProps)(DiscProductForm);
+export default connect(null, mapDispatchToProps)(AddProductForm);
