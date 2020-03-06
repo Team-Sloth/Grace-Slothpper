@@ -207,13 +207,6 @@ async function seed() {
       stock: 20
     }),
     Product.create({
-      name: 'Corona Virus Outbreak Sticker Collection',
-      imageUrl: '/img/stickers.png',
-      description: 'Corona Virus Sticker Collection.',
-      price: 450,
-      stock: 10
-    }),
-    Product.create({
       name: 'Corona Virus W ill Save The Planet Tote',
       imageUrl: '/img/tote1.png',
       description:
