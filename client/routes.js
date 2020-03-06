@@ -33,7 +33,6 @@ class Routes extends Component {
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         <Route exact path="/products" component={Products} />
-        <Route path="/add-product" component={AddProduct} />
         <Route path="/products/:id" component={SingleProduct} />
         <Route path="/users/:id" component={SingleUser} />
         <Route path="/home" component={Home} />
@@ -45,6 +44,7 @@ class Routes extends Component {
               <Switch>
                 <Route exact path="/admin" component={AdminNav} />
                 <Route exact path="/users" component={Users} />
+                <Route path="/add-product" component={AddProduct} />
               </Switch>
             )}
           </Switch>
