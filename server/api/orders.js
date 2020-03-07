@@ -61,7 +61,7 @@ router.put('/cart/:userId', validateUserOrGuest, async (req, res, next) => {
         req.session.cart = [];
       }
       let product = req.session.cart.find(
-        p => p.lineItem.productId === req.body.productId
+        p => p.lineItem && p.lineItem.productId === req.body.productId
       );
       if (!product) {
         product = await Product.findByPk(req.body.productId, {raw: true});
@@ -159,8 +159,17 @@ router.delete('/cart/:userId', validateUserOrGuest, async (req, res, next) => {
       }
       const order = await Order.create({isCart: false, date: new Date()});
       for (let i = 0; i < req.session.cart.length; i++) {
-        req.session.cart[i].lineItem.orderId = order.id;
-        await LineItem.create(req.session.cart[i].lineItem);
+        if (req.session.cart[i].lineItem) {
+          req.session.cart[i].lineItem.orderId = order.id;
+          await LineItem.create(req.session.cart[i].lineItem);
+        } else {
+          req.session.cart[i].lineItem = {
+            productId: req.body.productId,
+            quantity: 1,
+            orderId: order.id
+          };
+          await LineItem.create(req.session.cart[i].lineItem);
+        }
       }
       req.session.cart = [];
       res.json(order);
