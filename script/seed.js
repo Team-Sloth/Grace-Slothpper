@@ -91,7 +91,8 @@ async function seed() {
     Product.create({
       name: 'Idle Sloth Door Hanger',
       imageUrl: '/img/idleSloth.jpg',
-      description: 'Ideal for your room, and office. Tough, Durable Plastic!',
+      description:
+        'This door hanger will look great in any room, home den, cave, or office! Tough, Durable Plastic!',
       price: 299,
       stock: 199
     }),

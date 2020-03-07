@@ -30,7 +30,7 @@ export const getProducts = () => async dispatch => {
   }
 };
 
-export const addProduct = product => async dispatch => {
+export const addProduct = product => async (dispatch, getState) => {
   try {
     const {data} = await axios.post('/api/products', product);
     dispatch(addedProduct(data));
@@ -46,6 +46,8 @@ export default function(state = defaultProducts, action) {
   switch (action.type) {
     case GOT_PRODUCTS:
       return action.products;
+    case ADDED_PRODUCT:
+      return [...state, action.product];
     default:
       return state;
   }
