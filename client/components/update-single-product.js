@@ -6,6 +6,10 @@ import {getSingleProduct, updateSingleProduct} from '../store';
  * COMPONENT
  */
 class EditSingleProduct extends React.Component {
+  // static getDerivedStateFromProps(props, state) {
+  //   return { ...props.params };
+  // }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -20,6 +24,7 @@ class EditSingleProduct extends React.Component {
   }
 
   componentDidMount() {
+    console.log('ComponentDidMount, How many times do I run?');
     this.setState({
       id: this.props.product.id,
       name: this.props.product.name,
@@ -61,6 +66,7 @@ class EditSingleProduct extends React.Component {
                   type="text"
                   name="name"
                   onChange={this.handleChange}
+                  placeholder={this.props.name}
                   value={this.state.name}
                 />
               </label>
@@ -69,6 +75,7 @@ class EditSingleProduct extends React.Component {
             <div>
               <label>
                 New Product Description:
+                <div>{this.props.product.description}</div>
                 <input
                   type="text"
                   name="description"
@@ -113,11 +120,11 @@ class EditSingleProduct extends React.Component {
 /**
  * CONTAINER
  */
-// const mapState = state => {
-//   return {
-//     product: state.product
-//   };
-// };
+const mapState = state => {
+  return {
+    product: state.product
+  };
+};
 
 const mapDispatch = dispatch => {
   return {
@@ -126,4 +133,4 @@ const mapDispatch = dispatch => {
   };
 };
 
-export default connect(null, mapDispatch)(EditSingleProduct);
+export default connect(mapState, mapDispatch)(EditSingleProduct);
