@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {getSingleProduct, addToCart} from '../store';
+import UpdateProductForm from './update-single-product';
 
 /**
  * COMPONENT
@@ -12,6 +13,7 @@ class SingleProduct extends React.Component {
   }
   render() {
     const {product} = this.props;
+
     return (
       <div>
         <div>
@@ -29,6 +31,9 @@ class SingleProduct extends React.Component {
         >
           Add 1 to Cart!
         </button>
+
+        {/* { product.id && <UpdateProductForm product={product} />} */}
+        {product.id && <UpdateProductForm product={product} />}
       </div>
     );
   }
