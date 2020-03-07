@@ -47,7 +47,7 @@ router.delete('/:productId', validateAdmin, async (req, res, next) => {
 router.post('/', validateAdmin, async (req, res, next) => {
   try {
     const product = await Product.create(req.body);
-    res.json(product);
+    res.status(201).json(product);
   } catch (err) {
     next(err);
   }
