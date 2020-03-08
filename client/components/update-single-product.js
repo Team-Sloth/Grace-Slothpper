@@ -6,10 +6,6 @@ import {getSingleProduct, updateSingleProduct} from '../store';
  * COMPONENT
  */
 class EditSingleProduct extends React.Component {
-  // static getDerivedStateFromProps(props, state) {
-  //   return { ...props.params };
-  // }
-
   constructor(props) {
     super(props);
     this.state = {
@@ -24,7 +20,6 @@ class EditSingleProduct extends React.Component {
   }
 
   componentDidMount() {
-    console.log('ComponentDidMount, How many times do I run?');
     this.setState({
       id: this.props.product.id,
       name: this.props.product.name,
@@ -40,9 +35,10 @@ class EditSingleProduct extends React.Component {
     });
   }
 
-  handleSubmit(event) {
+  async handleSubmit(event) {
     event.preventDefault();
-    this.props.updateSingleProduct(this.state);
+    await this.props.updateSingleProduct(this.state);
+    console.log('the updated props are ', this.props);
     this.setState({
       id: this.props.product.id,
       name: this.props.product.name,
