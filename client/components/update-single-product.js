@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {getSingleProduct, updateSingleProduct} from '../store';
+import {updateSingleProduct} from '../store';
 
 /**
  * COMPONENT
@@ -124,7 +124,6 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    // getSingleProduct: id => dispatch(getSingleProduct(id)),
     updateSingleProduct: product => dispatch(updateSingleProduct(product))
   };
 };
