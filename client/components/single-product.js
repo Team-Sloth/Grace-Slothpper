@@ -25,15 +25,14 @@ class SingleProduct extends React.Component {
           <p>In Stock: {product.stock}</p>
         </div>
         <button
+          type="button"
           onClick={() =>
             this.props.addToCart(this.props.user.id, product.id, 1)
           }
         >
           Add 1 to Cart!
         </button>
-
-        {/* { product.id && <UpdateProductForm product={product} />} */}
-        {product.id && <UpdateProductForm product={product} />}
+        {<UpdateProductForm key={product.id} product={product} />}
       </div>
     );
   }
