@@ -16,6 +16,20 @@ router.get('/', validateAdmin, async (req, res, next) => {
   }
 });
 
+router.get('/:userId', validateUserOrGuest, async (req, res, next) => {
+  try {
+    const userId = req.params.userId;
+    const user = await User.findByPk(userId);
+    const userOrders = await user.getOrders({
+      where: {isCart: false},
+      include: [{model: Product}]
+    });
+    res.json(userOrders);
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.get('/cart/:userId', validateUserOrGuest, async (req, res, next) => {
   try {
     if (req.params.userId === 'undefined') {
