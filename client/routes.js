@@ -13,7 +13,8 @@ import {
   Users,
   SingleUser,
   Home,
-  CheckOut
+  CheckOut,
+  Orders
 } from './components';
 import {me} from './store';
 
@@ -41,7 +42,8 @@ class Routes extends Component {
         <Route path="/checkout" component={CheckOut} />
         {isLoggedIn && (
           <Switch>
-            {/* Routes placed here are only available after logging in */}
+            {/* Routes placed here are only available after logging in */}\
+            <Route path="/orders/:id" component={Orders} />
             {isAdmin && (
               <Switch>
                 <Route exact path="/admin" component={AdminNav} />

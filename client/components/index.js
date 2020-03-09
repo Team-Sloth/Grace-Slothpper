@@ -16,3 +16,4 @@ export {default as SingleUser} from './single-user';
 export {default as AdminNav} from './AdminNav';
 export {default as SingleUserCartTable} from './SingleUserCartTable';
 export {default as CheckOut} from './CheckOut';
+export {default as Orders} from './Orders';

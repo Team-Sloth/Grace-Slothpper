@@ -62,12 +62,6 @@ const cartStyles = {
 
 const CartItemMenu = props => {
   const {item, deleteLineItem, addToCart, user} = props;
-  console.log(
-    'item has issue ',
-    item.name,
-    item.hasIssue,
-    item.issueDescription
-  );
   return (
     <div key={item.id} style={cartStyles.cartContainer}>
       <div>

@@ -18,6 +18,7 @@ const Navbar = ({handleClick, isLoggedIn, user}) => (
           </a>
           <Link to="/products">Products</Link>
           <Link to="/cart">Cart</Link>
+          <Link to={`/orders/${user.id}`}>My Orders</Link>
           {user !== undefined && user.isAdmin ? (
             <Link to="/admin">Admin Page</Link>
           ) : null}
