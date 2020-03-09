@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
 const db = require('../db');
+const Product = require('./product');
 
 const LineItem = db.define('lineItem', {
   quantity: {
@@ -9,5 +10,10 @@ const LineItem = db.define('lineItem', {
     }
   }
 });
+
+LineItem.prototype.withProductInfo = async function() {
+  const product = await Product.findByPk(this.productId, {raw: true});
+  return {...this.dataValues, product};
+};
 
 module.exports = LineItem;

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 import {getCart, checkOut, deleteLineItem, addToCart} from '../store';
 
 /**
@@ -23,25 +24,34 @@ class UserCart extends React.Component {
                   {p.name} &mdash; x{p.lineItem.quantity}
                 </h3>
                 <p>
-                  Price: ${p.price / 100} * {p.lineItem.quantity} = ${p.price /
-                    100 *
-                    p.lineItem.quantity}
+                  Price: ${p.price / 100} * {p.lineItem.quantity} = $
+                  {p.price / 100 * p.lineItem.quantity}
                 </p>
                 <button
+                  type="button"
                   onClick={() => this.props.deleteLineItem(user.id, p.id)}
                 >
                   DELETE PRODUCT X
                 </button>
-                <button onClick={() => this.props.addToCart(user.id, p.id, 1)}>
+                <button
+                  type="button"
+                  onClick={() => this.props.addToCart(user.id, p.id, 1)}
+                >
                   +1
                 </button>
-                <button onClick={() => this.props.addToCart(user.id, p.id, -1)}>
+                <button
+                  type="button"
+                  onClick={() => this.props.addToCart(user.id, p.id, -1)}
+                >
                   -1
                 </button>
               </div>
             ))
           : ''}
-        <button onClick={() => this.props.checkOut(user.id)}>Check Out</button>
+        <Link to="/checkout">Check Out (Order Confirmation)</Link>
+        <button type="button" onClick={() => this.props.checkOut(user.id)}>
+          Check Out (BUY)
+        </button>
       </div>
     );
   }
