@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {getProducts} from '../store';
 import {Link} from 'react-router-dom';
 import AddProductForm from '../components/add-product.js';
+import queryString from 'query-string';
 
 /**
  * COMPONENT
@@ -13,7 +14,18 @@ class Products extends React.Component {
     this.props.getProducts();
   }
   render() {
-    const {products} = this.props;
+    const {products, location} = this.props;
+    let qs = {};
+    if (location && location.search) {
+      qs = queryString.parse(location.search);
+    }
+    let category = qs.category;
+    let filteredProducts = products;
+    if (category) {
+      filteredProducts = products.filter(
+        p => p.category && p.category.name === category
+      );
+    }
 
     return (
       <div>
@@ -24,8 +36,18 @@ class Products extends React.Component {
             </div>
           )}
         </div>
+        <Link to="/products">
+          <button>Show All</button>
+        </Link>
+        <Link to="/products?category=Sloth">
+          <button>Filter Sloth Only</button>
+        </Link>
+        <Link to="/products?category=Coronavirus">
+          <button>Filter Coronavirus Only</button>
+        </Link>
+
         <div className="product-list">
-          {products.map(p => (
+          {filteredProducts.map(p => (
             <div className="product-list-item" key={p.id}>
               <Link to={`/products/${p.id}`} key={p.id}>
                 <h3>

@@ -1,7 +1,13 @@
 'use strict';
 
 const db = require('../server/db');
-const {User, Product, Order, LineItem} = require('../server/db/models');
+const {
+  User,
+  Product,
+  Order,
+  LineItem,
+  Category
+} = require('../server/db/models');
 
 async function seed() {
   await db.sync({force: true});
@@ -208,7 +214,7 @@ async function seed() {
       stock: 20
     }),
     Product.create({
-      name: 'Corona Virus W ill Save The Planet Tote',
+      name: 'Corona Virus Will Save The Planet Tote',
       imageUrl: '/img/tote1.png',
       description:
         'Cool motivational T-Shirt for corona patient and Researchers Doctors motivation to resist and find a cure fore corona virus.',
@@ -338,7 +344,7 @@ async function seed() {
       stock: 20
     }),
     Product.create({
-      name: 'Don t eat me iPhone Case',
+      name: "Don't eat me iPhone Case",
       imageUrl: '/img/bat.png',
       description: 'Don t eat me, bat may cause corona virus',
       price: 1500,
@@ -388,7 +394,7 @@ async function seed() {
       stock: 500
     }),
     Product.create({
-      name: 'Corona w Lime',
+      name: 'Corona w/ Lime',
       imageUrl: '/img/coronavirus-w-lyme.jpg',
       description: 'Grab a bear and relax.',
       price: 1700,
@@ -411,6 +417,39 @@ async function seed() {
       stock: 40
     })
   ]);
+
+  const virusItems = [
+    'Sloth Mask',
+    'Coronal Virus COVID-19 Vaccine',
+    'Corona Blocker 3000',
+    'Official Scrabble - Limited Edition!',
+    'Corona Virus Will Save The Planet Tote',
+    'Corona Virus Made By Humans Tote',
+    'How to protect yourself from Corona Virus',
+    "Don't eat me iPhone Case",
+    'Iconic Corona Beer MEME',
+    'Sloth Corona Sticker',
+    'Monkey Corona Sticker',
+    'Corona Virus Monkey Protection Socks',
+    'Prevent Outbreaks iPhone Case',
+    'Corona w/ Lime'
+  ];
+
+  const sloth = await Category.create({
+    name: 'Sloth'
+  });
+  const virus = await Category.create({
+    name: 'Coronavirus'
+  });
+
+  for (let i = 0; i < products.length; i++) {
+    if (virusItems.includes(products[i].name)) {
+      await products[i].setCategory(virus);
+    } else {
+      await products[i].setCategory(sloth);
+      console.log(products[i]);
+    }
+  }
 
   const orders = await Promise.all([
     Order.create({
