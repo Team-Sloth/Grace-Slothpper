@@ -58,3 +58,19 @@ form div {
   margin: 0.6em;
   padding: 0.4em;
 }
+
+.checkout-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 85vw;
+  margin: 0 auto;
+  margin-top: 20;
+  border: 1px solid black;
+}
+
+.checkout-cart-container {
+  display: grid;
+  grid-column-gap: 10;
+  grid-template-columns: 40% 30% 30%;
+  width: 70%;
+}
