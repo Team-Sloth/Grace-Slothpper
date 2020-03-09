@@ -32,6 +32,18 @@ nav a {
   text-decoration: none;
 }
 
+footer {
+  align-items: center;
+  background-color: black;
+  color: #c0c0c0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  height: 7em;
+  text-decoration: none;
+  margin: 0;
+}
+
 label {
   display: block;
 }
