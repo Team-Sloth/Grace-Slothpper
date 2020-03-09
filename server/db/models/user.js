@@ -38,6 +38,9 @@ const User = db.define('user', {
   lastName: {
     type: Sequelize.STRING,
     allowNull: false
+  },
+  googleId: {
+    type: Sequelize.STRING
   }
   // stripe metadata https://stripe.com/docs/api/metadata
   // shipping: {
