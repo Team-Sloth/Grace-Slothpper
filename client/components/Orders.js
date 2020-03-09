@@ -20,6 +20,13 @@ class Orders extends Component {
   }
 }
 
+const styles = {
+  table: {
+    width: '80vw',
+    margin: 'auto'
+  }
+};
+
 const OrderTable = props => {
   const {order} = props;
   const round = numb => Number(Math.round(numb + 'e' + 2) + 'e-' + 2);
@@ -30,9 +37,8 @@ const OrderTable = props => {
     return round(result);
   };
 
-  console.log('order products is ', getOrderTotal(order.products));
   return (
-    <table>
+    <table style={styles.table}>
       <thead>
         <tr>
           <th>Order ID: {order.id}</th>
@@ -50,6 +56,7 @@ const OrderTable = props => {
         {order.products.map(p => (
           <tr key={p.id}>
             <td>
+              <h5>{p.name}</h5>
               <img src={p.imageUrl} height="160px" />
             </td>
             <td>
@@ -58,7 +65,7 @@ const OrderTable = props => {
                 : p.description}
             </td>
             <td>{p.lineItem.quantity}</td>
-            <td>{round(p.price / 100)}e</td>
+            <td>${round(p.price / 100)}</td>
           </tr>
         ))}
       </tbody>
