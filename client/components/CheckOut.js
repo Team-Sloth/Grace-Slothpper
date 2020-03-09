@@ -3,17 +3,6 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {getCart, checkOut, deleteLineItem, addToCart} from '../store';
 
-const styles = {
-  container: {
-    display: 'flex',
-    flexDirection: 'column',
-    maxWidth: '85vw',
-    margin: '0 auto',
-    marginTop: 20,
-    border: '1px solid black'
-  }
-};
-
 class CheckOut extends React.Component {
   componentDidMount() {
     this.props.getCart(this.props.user.id);
@@ -21,7 +10,7 @@ class CheckOut extends React.Component {
   render() {
     const {cart, user, deleteLineItem, addToCart} = this.props;
     return (
-      <section style={styles.container}>
+      <section className="checkout-container">
         <div>
           <h4>Shipping Details</h4>
           <li>address info...</li>
@@ -51,15 +40,6 @@ class CheckOut extends React.Component {
   }
 }
 
-const cartStyles = {
-  cartContainer: {
-    display: 'grid',
-    gridColumnGap: 10,
-    gridTemplateColumns: '40% 30% 30%',
-    width: '70%'
-  }
-};
-
 const CartItemMenu = props => {
   const {item, deleteLineItem, addToCart, user} = props;
   console.log(
@@ -69,7 +49,7 @@ const CartItemMenu = props => {
     item.issueDescription
   );
   return (
-    <div key={item.id} style={cartStyles.cartContainer}>
+    <div key={item.id} className="checkout-cart-container">
       <div>
         <img src={item.imageUrl} height="200px" />
       </div>
