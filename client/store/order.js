@@ -46,6 +46,7 @@ export const getCart = userId => async dispatch => {
 
 export const addToCart = (userId, productId, quantity) => async dispatch => {
   try {
+    quantity = Number(quantity);
     const res = await axios.put(`/api/orders/cart/${userId}`, {
       productId,
       quantity
