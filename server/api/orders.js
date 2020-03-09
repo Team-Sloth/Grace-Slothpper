@@ -159,31 +159,6 @@ router.delete(
   }
 );
 
-router.get('/checkout/:userId', async (req, res, next) => {
-  const userId = req.params.userId;
-  try {
-    const cart = await Order.getUserCart(userId);
-    const lineItemQuery = await LineItem.findAll({
-      where: {
-        orderId: cart.id
-      }
-    });
-    const lineItems = await Promise.all(
-      lineItemQuery.map(async item => {
-        const itemWithProduct = await item.withProductInfo();
-        if (itemWithProduct.product.stock < itemWithProduct.quantity) {
-          itemWithProduct.errorMessage =
-            'Desired quantity exceeds stock.  Please adjust your cart.';
-        }
-        return itemWithProduct;
-      })
-    );
-    res.json(lineItems);
-  } catch (err) {
-    next(err);
-  }
-});
-
 // Delete or reset cart post checkout
 router.delete('/cart/:userId', validateUserOrGuest, async (req, res, next) => {
   try {

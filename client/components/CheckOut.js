@@ -62,8 +62,14 @@ const cartStyles = {
 
 const CartItemMenu = props => {
   const {item, deleteLineItem, addToCart, user} = props;
+  console.log(
+    'item has issue ',
+    item.name,
+    item.hasIssue,
+    item.issueDescription
+  );
   return (
-    <div style={cartStyles.cartContainer}>
+    <div key={item.id} style={cartStyles.cartContainer}>
       <div>
         <img src={item.imageUrl} height="200px" />
       </div>
@@ -72,6 +78,7 @@ const CartItemMenu = props => {
         <h5>Quantity: {item.lineItem.quantity}</h5>
       </div>
       <div>
+        {item.hasIssue ? <h5>{item.issueText}</h5> : null}
         <p>
           Price: ${item.price / 100} * {item.lineItem.quantity} = $
           {item.price / 100 * item.lineItem.quantity}
