@@ -42,4 +42,7 @@ const Product = db.define('product', {
   }
 });
 
+Product.prototype.hasEnoughStock = function() {
+  return this.lineItem.quantity <= this.stock;
+};
 module.exports = Product;

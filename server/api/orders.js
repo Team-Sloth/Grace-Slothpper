@@ -16,6 +16,20 @@ router.get('/', validateAdmin, async (req, res, next) => {
   }
 });
 
+router.get('/:userId', validateUserOrGuest, async (req, res, next) => {
+  try {
+    const userId = req.params.userId;
+    const user = await User.findByPk(userId);
+    const userOrders = await user.getOrders({
+      where: {isCart: false},
+      include: [{model: Product}]
+    });
+    res.json(userOrders);
+  } catch (err) {
+    next(err);
+  }
+});
+
 router.get('/cart/:userId', validateUserOrGuest, async (req, res, next) => {
   try {
     if (req.params.userId === 'undefined') {
@@ -34,7 +48,18 @@ router.get('/cart/:userId', validateUserOrGuest, async (req, res, next) => {
     const products = await cartOrder.getProducts({
       include: [{model: Order}]
     });
-    res.json(products);
+    const productData = await Promise.all(
+      products.map(async p => {
+        const hasEnoughStock = await p.hasEnoughStock();
+        if (!hasEnoughStock) {
+          p.dataValues.hasIssue = true;
+          p.dataValues.issueText =
+            'Desired amount greater than stock.  Please update order';
+        }
+        return p;
+      })
+    );
+    res.json(productData);
   } catch (err) {
     next(err);
   }
