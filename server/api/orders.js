@@ -98,13 +98,13 @@ router.put('/cart/:userId', validateUserOrGuest, async (req, res, next) => {
       return;
     }
 
-    const [cartOrder, cartCreated] = await Order.findOrCreate({
+    const [cartOrder, _] = await Order.findOrCreate({
       where: {
         userId: req.params.userId,
         isCart: true
       }
     });
-    const [lineItem, created] = await LineItem.findOrCreate({
+    const [lineItem, __] = await LineItem.findOrCreate({
       where: {
         orderId: cartOrder.id,
         productId: req.body.productId

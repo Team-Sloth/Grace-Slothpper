@@ -74,3 +74,22 @@ form div {
   grid-template-columns: 40% 30% 30%;
   width: 70%;
 }
+
+/* SINGLE PRODUCT STYLES */
+.add-item-container {
+  display: flex;
+  justify-content: space-between;
+  width: 200px;
+}
+
+/* Chrome, Safari, Edge, Opera */
+.add-item-container > input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+.add-item-container > input[type='number'] {
+  -moz-appearance: textfield;
+}

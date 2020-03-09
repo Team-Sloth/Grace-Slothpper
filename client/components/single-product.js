@@ -8,12 +8,51 @@ import UpdateProductForm from './update-single-product';
  * COMPONENT
  */
 class SingleProduct extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      itemQuantity: 1
+    };
+    this.handleDecrement = this.handleDecrement.bind(this);
+    this.handleIncrement = this.handleIncrement.bind(this);
+    this.handleSelect = this.handleSelect.bind(this);
+  }
+
   componentDidMount() {
     this.props.getSingleProduct(this.props.match.params.id);
   }
-  render() {
-    const {product} = this.props;
 
+  handleSelect(e) {
+    this.setState({
+      itemQuantity: e.target.value
+    });
+  }
+
+  handleDecrement(e) {
+    e.preventDefault();
+    if (this.state.itemQuantity <= 1) return;
+    this.setState(state => {
+      return {itemQuantity: state.itemQuantity - 1};
+    });
+  }
+
+  handleIncrement(e) {
+    e.preventDefault();
+    if (this.state.itemQuantity >= this.props.product.stock) return;
+    this.setState(state => {
+      return {itemQuantity: state.itemQuantity + 1};
+    });
+  }
+
+  render() {
+    const {product, user} = this.props;
+    const {itemQuantity} = this.state;
+    const productStockArr = new Array(product.stock)
+      .fill(null)
+      .map((el, i) => i + 1);
+    console.log(productStockArr);
+
+    console.log(user.isAdmin);
     return (
       <div>
         <div>
@@ -24,15 +63,32 @@ class SingleProduct extends React.Component {
           <p>{product.description}</p>
           <p>In Stock: {product.stock}</p>
         </div>
-        <button
-          type="button"
-          onClick={() =>
-            this.props.addToCart(this.props.user.id, product.id, 1)
-          }
-        >
-          Add 1 to Cart!
-        </button>
-        {<UpdateProductForm key={product.id} product={product} />}
+        <div className="add-item-container">
+          <button type="button" onClick={e => this.handleDecrement(e)}>
+            -
+          </button>
+          <select value={itemQuantity} onChange={e => this.handleSelect(e)}>
+            {productStockArr.map(el => (
+              <option key={el} value={el}>
+                {el}
+              </option>
+            ))}
+          </select>
+          <button type="button" onClick={e => this.handleIncrement(e)}>
+            +
+          </button>
+          <button
+            type="button"
+            onClick={() =>
+              this.props.addToCart(user.id, product.id, itemQuantity)
+            }
+          >
+            Add to Cart!
+          </button>
+        </div>
+        {user.isAdmin ? (
+          <UpdateProductForm key={product.id} product={product} />
+        ) : null}
       </div>
     );
   }
