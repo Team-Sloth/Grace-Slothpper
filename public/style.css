@@ -43,42 +43,53 @@ div {
 .siteHeader__section {
   display: flex;
   align-items: center;
+  background-color: #000000;
 }
 .siteHeader__logo {
   padding: 0px 0px;
   font-size: 20px;
+  background-color: #000000;
 }
 .siteHeader__logo a:link {
   color: #d9e9ef;
   text-decoration: none;
+  background-color: #000000;
 }
 .siteHeader__logo a:visited {
   color: #d9e9ef;
+  background-color: #000000;
 }
 .siteHeader__logo a:hover {
   color: #d9e9ef;
+  background-color: #000000;
 }
 .siteHeader__logo a:active {
   color: #d9e9ef;
+  background-color: #000000;
 }
 
 .siteHeader__item {
   padding: 5px 15px;
   font-size: 14px;
+  background-color: #000000;
 }
 
 .siteHeader__item a:link {
   color: #d9e9ef;
   text-decoration: none;
+  background-color: #000000;
 }
 .siteHeader__item a:visited {
   color: #d9e9ef;
+  background-color: #000000;
 }
 .siteHeader__item a:hover {
   color: #d9e9ef;
+  background-color: #000000;
 }
 .siteHeader__item a:active {
   color: #d9e9ef;
+  background-color: #000000;
 }
 
 .siteHeaderButton {
@@ -157,29 +168,43 @@ input::-webkit-inner-spin-button {
 }
 
 /* Cards Start */
-.btn {
-  background-color: white;
-  border: 1px solid #cccccc;
+.card_btn {
+  background-color: black;
+  border: 1px solid black;
   border-radius: 1rem;
-  color: #696969;
-  padding: 0.5rem;
-  font-size: 600;
+  color: #cccccc;
+  padding: 0.8rem;
+  font-size: 400;
 }
 
-.btn--block {
+.card_btn--block {
   display: block;
   width: 100%;
+  cursor: pointer;
 }
 
-.btn a:link,
-a:visited,
-a:hover,
-a:active {
-  color: #696969;
+.card_btn a:link {
+  background-color: #696969;
   text-decoration: none;
 }
-.btn.focus,
-.btn:focus {
+
+.card_btn a:hover {
+  background-color: #696969;
+  text-decoration: none;
+}
+
+.card_btn a:active {
+  background-color: #696969;
+  text-decoration: none;
+}
+
+.card_btn a:visited {
+  background-color: #696969;
+  text-decoration: none;
+}
+
+.card_btn.focus,
+.card_btn:focus {
   outline: 0;
   box-shadow: none !important;
 }
@@ -195,6 +220,7 @@ a:active {
 .cards__item {
   display: flex;
   padding: 1rem;
+  text-decoration: none;
   @media (min-width: 40rem) {
     width: 50%;
   }
@@ -202,11 +228,11 @@ a:active {
     width: 33.3333%;
   }
 }
-.cards__item a:link,
-a:visited,
+
+.card__item a:link,
 a:hover,
-a:active {
-  color: #696969;
+a:active,
+a:visited {
   text-decoration: none;
 }
 
@@ -221,19 +247,18 @@ a:active {
   text-decoration: none;
 }
 
-.card a:link,
-a:visited,
-a:hover,
-a:active {
-  color: #696969;
-  text-decoration: none;
-}
-
 .card__content {
   display: flex;
   flex: 1 1 auto;
   flex-direction: column;
   padding: 1rem;
+}
+
+.card__content a:link,
+a:hover,
+a:active,
+a:visited {
+  text-decoration: none;
 }
 
 .card__title {
@@ -245,11 +270,25 @@ a:active {
   text-decoration: none;
 }
 
+.card__title a:link,
+a:hover,
+a:active,
+a:visited {
+  text-decoration: none;
+}
+
 .card__text {
   flex: 1 1 auto;
   font-size: 0.875rem;
   line-height: 1.5;
   margin-bottom: 1.25rem;
+  text-decoration: none;
+}
+
+.card__text a:link,
+a:hover,
+a:active,
+a:visited {
   text-decoration: none;
 }
 
