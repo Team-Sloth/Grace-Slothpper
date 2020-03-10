@@ -78,7 +78,7 @@ const OrderTable = props => {
                 : p.description}
             </td>
             <td>{p.lineItem.quantity}</td>
-            <td>${round(p.price / 100)}</td>
+            <td>${round(p.lineItem.soldPrice / 100)}</td>
           </tr>
         ))}
       </tbody>

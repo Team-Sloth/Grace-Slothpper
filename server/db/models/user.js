@@ -91,12 +91,20 @@ User.checkOut = async function(userId) {
     }
   });
   // update the cart items with the sold price
-  await Promise.all(
+  const lineItems = await Promise.all(
     lineItemsQuery.map(async item => {
       const itemWithProduct = await item.withProductInfo();
       item.soldPrice = itemWithProduct.product.price;
       await item.save();
       return itemWithProduct;
+    })
+  );
+  // update products with amount purchased
+  await Promise.all(
+    lineItems.map(async item => {
+      const product = await Product.findByPk(item.productId);
+      product.stock = product.stock - item.quantity;
+      await product.save();
     })
   );
   // mark order as complete via isCart

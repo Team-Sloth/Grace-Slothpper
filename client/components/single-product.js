@@ -47,12 +47,10 @@ class SingleProduct extends React.Component {
   render() {
     const {product, user} = this.props;
     const {itemQuantity} = this.state;
-    const productStockArr = new Array(product.stock)
+    const productStockArr = new Array(product.stock >= 10 ? 10 : product.stock)
       .fill(null)
       .map((el, i) => i + 1);
-    console.log(productStockArr);
 
-    console.log(user.isAdmin);
     return (
       <div>
         <div>

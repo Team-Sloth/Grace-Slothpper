@@ -78,7 +78,6 @@ router.get('/:orderId', validateAdmin, async (req, res, next) => {
 
 // Add items to cart
 router.put('/cart/:userId', validateUserOrGuest, async (req, res, next) => {
-  console.log('REQ BODY IN PUT is ', req.body);
   try {
     if (req.params.userId === 'undefined') {
       // guest cart
