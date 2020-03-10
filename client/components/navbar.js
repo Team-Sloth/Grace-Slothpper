@@ -3,24 +3,19 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {logout} from '../store';
+import SubNavbar from './subnavbar';
 
 const Navbar = ({handleClick, isLoggedIn, user}) => (
   <div>
     <div className="siteHeader">
       <div className="siteHeader__section">
-        <div className="siteHeader__item">
+        <div className="siteHeader__logo">
           <Link to="/home">
             <img src="/img/sloth.gif" width={90} />
           </Link>
         </div>
-        <div className="siteHeader__item siteHeaderButton">
-          <Link to="/products">ALL PRODUCTS</Link>
-        </div>
-        <div className="siteHeader__item siteHeaderButton">
-          <Link to="/products?category=Sloth">SLOTH</Link>
-        </div>
-        <div className="siteHeader__item siteHeaderButton">
-          <Link to="/products?category=Coronavirus">CORONAVIRUS</Link>
+        <div className="siteHeader__logo">
+          <Link to="/home">Slothpper</Link>
         </div>
       </div>
       {isLoggedIn ? (
@@ -60,6 +55,7 @@ const Navbar = ({handleClick, isLoggedIn, user}) => (
         </div>
       )}
     </div>
+    <SubNavbar />
   </div>
 );
 

@@ -47,6 +47,23 @@ nav a {
   display: flex;
   align-items: center;
 }
+.siteHeader__logo {
+  padding: 0px 0px;
+  font-size: 20px;
+}
+.siteHeader__logo a:link {
+  color: #d9e9ef;
+  text-decoration: none;
+}
+.siteHeader__logo a:visited {
+  color: #d9e9ef;
+}
+.siteHeader__logo a:hover {
+  color: #d9e9ef;
+}
+.siteHeader__logo a:active {
+  color: #d9e9ef;
+}
 
 .siteHeader__item {
   padding: 5px 15px;
@@ -69,6 +86,10 @@ nav a {
 
 .siteHeaderButton {
   cursor: pointer;
+  color: #d9e9ef;
+}
+
+.siteHeaderFooter {
   color: #d9e9ef;
 }
 
