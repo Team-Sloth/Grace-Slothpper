@@ -407,3 +407,13 @@ a:visited {
 }
 
 /* Cards Single Product Ends */
+
+/* Pagination */
+
+.paginator {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+/* Pagination Ends */
