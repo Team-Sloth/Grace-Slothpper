@@ -133,9 +133,14 @@ form div {
 }
 
 .checkout-container {
+  display: grid;
+  grid-template-columns: 65% 35%;
+  border: 2px solid gray;
+}
+
+.cart-items-container {
   display: flex;
   flex-direction: column;
-  max-width: 85vw;
   margin: 0 auto;
   margin-top: 20;
   border: 1px solid black;
@@ -161,7 +166,55 @@ form div {
   color: red;
 }
 
-/* Cards Multiple Product Page */
+.order-summary-line {
+  display: flex;
+  justify-content: space-between;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+/* Cards Start */
+.card_btn {
+  background-color: black;
+  border: 1px solid black;
+  border-radius: 1rem;
+  color: #cccccc;
+  padding: 0.8rem;
+  font-size: 400;
+}
+
+.card_btn--block {
+  display: block;
+  width: 100%;
+  cursor: pointer;
+}
+
+.card_btn a:link {
+  background-color: #696969;
+  text-decoration: none;
+}
+
+.card_btn a:hover {
+  background-color: #696969;
+  text-decoration: none;
+}
+
+.card_btn a:active {
+  background-color: #696969;
+  text-decoration: none;
+}
+
+.card_btn a:visited {
+  background-color: #696969;
+  text-decoration: none;
+}
+
+.card_btn.focus,
+.card_btn:focus {
+  outline: 0;
+  box-shadow: none !important;
+}
 
 .cards {
   display: flex;

@@ -105,6 +105,16 @@ export default function(state = [], action) {
       const stateCopy = [...state];
       const product = stateCopy.find(p => p.id === action.lineItem.productId);
       if (product) {
+        if (action.lineItem.quantity <= product.stock) {
+          product.hasIssue = false;
+          product.issueText = null;
+          console.log('reducer ', product);
+        } else {
+          product.hasIssue = true;
+          product.issueText =
+            'Desired amount greater than stock.  Please update order';
+        }
+
         product.lineItem = action.lineItem;
       }
       return stateCopy;

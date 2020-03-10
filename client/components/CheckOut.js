@@ -8,11 +8,8 @@ class CheckOut extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      orderError: '',
-      stripeDisabled: true,
-      stripeShowModal: false
+      orderError: ''
     };
-    this.handleToggleStripe = this.handleToggleStripe.bind(this);
     this.handlePlaceOrder = this.handlePlaceOrder.bind(this);
   }
 
@@ -20,22 +17,10 @@ class CheckOut extends React.Component {
     this.props.getCart(this.props.user.id);
   }
 
-  handleToggleStripe() {
-    console.log('toggling stripe button');
-    this.setState(state => {
-      return {
-        stripeDisabled: !state.stripeDisabled,
-        stripeShowModal: !state.stripeShowModal
-      };
-    });
-  }
-
   async handlePlaceOrder(userId) {
     try {
       await this.props.checkOut(userId);
-      this.setState(state => {
-        return {stripeDisabled: false};
-      });
+      console.log('Successfully placed order!');
     } catch (error) {
       this.setState(state => {
         return {orderError: error.message};
@@ -52,6 +37,12 @@ class CheckOut extends React.Component {
     const itemsTotal = cart.reduce((count, item) => {
       return count + item.lineItem.quantity;
     }, 0);
+    const hasError =
+      this.props.cart.filter(item => {
+        if (!!item.issueText && item.issueText.length) {
+          return item;
+        }
+      }).length > 0;
 
     return (
       <div>
@@ -83,15 +74,8 @@ class CheckOut extends React.Component {
               <h5>Order Total:</h5>
               <span>{orderTotal / 100}</span>
             </div>
-            <button
-              type="button"
-              // onClick={e => this.handlePlaceOrder(e, user.id)}
-              onClick={this.handleToggleStripe}
-            >
-              Check Out (BUY)
-            </button>
             <StripeButton
-              // disabled={this.state.stripeDisabled}
+              disabled={hasError}
               userId={user.id}
               handleOrder={() => this.handlePlaceOrder(user.id)}
               name="Grace Slothpper"
