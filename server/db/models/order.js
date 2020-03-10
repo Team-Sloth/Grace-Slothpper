@@ -28,4 +28,15 @@ Order.getLineItems = async function(orderId) {
   return lineItems;
 };
 
+Order.ensureValidOrder = async function(orderId) {
+  const lineItems = await Order.getLineItems(orderId);
+  const inStockItems = await Promise.all(
+    lineItems.map(async item => {
+      const isInStock = await item.validateInstock();
+      return isInStock;
+    })
+  );
+  return lineItems.length === inStockItems.filter(item => !!item).length;
+};
+
 module.exports = Order;
