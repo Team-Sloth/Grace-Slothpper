@@ -206,21 +206,31 @@ form div {
 .cards {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   list-style: none;
   margin: 0;
   padding: 0;
+}
+
+@media (min-width: 40rem) {
+  .cards__item {
+    width: 50%;
+  }
+}
+@media (min-width: 56rem) {
+  .cards__item: {
+    width: 33.3333%;
+  }
 }
 
 .cards__item {
   display: flex;
   padding: 1rem;
   text-decoration: none;
-  @media (min-width: 40rem) {
-    width: 50%;
-  }
-  @media (min-width: 56rem) {
-    width: 33.3333%;
-  }
+  min-height: 500px;
+  max-height: 500px;
+  min-width: 400px;
+  max-width: 400px;
 }
 
 .card__item a:link,
@@ -236,15 +246,23 @@ a:visited {
   box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
   display: flex;
   flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
   overflow: hidden;
   color: #696969;
   text-decoration: none;
 }
 
+.card__image {
+  overflow: hidden;
+}
+
 .card__content {
   display: flex;
-  flex: 1 1 auto;
+  /* flex: 1 1 auto; */
   flex-direction: column;
+  justify-content: space-between;
+  height: auto;
   padding: 1rem;
 }
 

@@ -15,6 +15,8 @@ class Products extends React.Component {
   }
   render() {
     const {products, location} = this.props;
+    const shortenStr = str =>
+      str.length < 175 ? str : str.slice(0, 170) + '...';
     let qs = {};
     if (location && location.search) {
       qs = queryString.parse(location.search);
@@ -49,7 +51,7 @@ class Products extends React.Component {
                       <div className="card__title">
                         {p.name} &mdash; ${p.price / 100}
                       </div>
-                      <p className="card__text">{p.description}</p>
+                      <p className="card__text">{shortenStr(p.description)}</p>
                     </div>
                   </div>
                 </Link>
