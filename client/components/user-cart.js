@@ -57,7 +57,7 @@ class UserCart extends React.Component {
           <StripeButton
             name="Grace Slothpper"
             description="Finalize Order"
-            amount={10000}
+            amount={600000}
           />
         </div>
       </div>
