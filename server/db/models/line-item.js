@@ -8,6 +8,12 @@ const LineItem = db.define('lineItem', {
     validate: {
       min: 0
     }
+  },
+  soldPrice: {
+    type: Sequelize.INTEGER,
+    validate: {
+      min: 0
+    }
   }
 });
 

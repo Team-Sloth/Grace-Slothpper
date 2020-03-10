@@ -200,17 +200,16 @@ router.delete('/cart/:userId', validateUserOrGuest, async (req, res, next) => {
       res.json(order);
       return;
     }
-    const user = await User.findByPk(req.params.userId);
-    const cartOrders = await user.getOrders({
-      where: {
-        isCart: true
-      }
-    });
-    cartOrders[0].isCart = false;
-    cartOrders[0].date = new Date();
-    await cartOrders[0].save();
-    res.json(cartOrders[0]);
+    const cart = await User.checkOut(req.params.userId);
+    res.json(cart);
   } catch (err) {
     next(err);
   }
 });
+
+/*
+  before updating order isCart to false,
+  get all line items
+    add line item sold price to line item
+
+*/

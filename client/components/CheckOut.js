@@ -4,9 +4,19 @@ import {Link} from 'react-router-dom';
 import {getCart, checkOut, deleteLineItem, addToCart} from '../store';
 
 class CheckOut extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.handlePlaceOrder = this.handlePlaceOrder.bind(this);
+  }
   componentDidMount() {
     this.props.getCart(this.props.user.id);
   }
+
+  handlePlaceOrder() {
+    e.preventDefault();
+  }
+
   render() {
     const {cart, user, deleteLineItem, addToCart} = this.props;
     return (
@@ -35,6 +45,7 @@ class CheckOut extends React.Component {
             />
           ))}
         </div>
+        <button type="button">Place your order</button>
       </section>
     );
   }
