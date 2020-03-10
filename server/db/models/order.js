@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize');
 const db = require('../db');
 const LineItem = require('./line-item');
+const moment = require('moment');
 
 const Order = db.define('order', {
   isCart: {
@@ -8,7 +9,10 @@ const Order = db.define('order', {
     defaultValue: false
   },
   date: {
-    type: Sequelize.DATE
+    type: Sequelize.DATE,
+    get: function() {
+      return moment(this.getDataValue('date')).format('MMMM Do, YYYY');
+    }
   },
   address: {
     type: Sequelize.STRING
