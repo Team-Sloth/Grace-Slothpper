@@ -94,14 +94,8 @@ form div {
   width: 200px;
 }
 
-/* Chrome, Safari, Edge, Opera */
-.add-item-container > input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
+/* ORDER CONFIRMATION STYLES */
 
-/* Firefox */
-.add-item-container > input[type='number'] {
-  -moz-appearance: textfield;
+.order-confirmation-error-message {
+  color: red;
 }

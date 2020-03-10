@@ -42,6 +42,7 @@ class CheckOut extends React.Component {
 
 const CartItemMenu = props => {
   const {item, deleteLineItem, addToCart, user} = props;
+  const disableAdd = item.hasIssue;
   return (
     <div key={item.id} className="checkout-cart-container">
       <div>
@@ -52,7 +53,9 @@ const CartItemMenu = props => {
         <h5>Quantity: {item.lineItem.quantity}</h5>
       </div>
       <div>
-        {item.hasIssue ? <h5>{item.issueText}</h5> : null}
+        {item.hasIssue ? (
+          <h5 className="order-confirmation-error-message">{item.issueText}</h5>
+        ) : null}
         <p>
           Price: ${item.price / 100} * {item.lineItem.quantity} = $
           {item.price / 100 * item.lineItem.quantity}
@@ -60,7 +63,11 @@ const CartItemMenu = props => {
         <button type="button" onClick={() => deleteLineItem(user.id, item.id)}>
           DELETE PRODUCT X
         </button>
-        <button type="button" onClick={() => addToCart(user.id, item.id, 1)}>
+        <button
+          type="button"
+          disabled={disableAdd}
+          onClick={() => addToCart(user.id, item.id, 1)}
+        >
           +1
         </button>
         <button type="button" onClick={() => addToCart(user.id, item.id, -1)}>
