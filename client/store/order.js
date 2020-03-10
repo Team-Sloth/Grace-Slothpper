@@ -67,11 +67,15 @@ export const addToCart = (userId, productId, quantity) => async dispatch => {
 };
 
 export const checkOut = userId => async dispatch => {
+  console.log('THUNK trying to check out');
   try {
     const {data} = await axios.delete(`/api/orders/cart/${userId}`);
     dispatch(checkedOut(userId));
   } catch (err) {
-    console.error(err);
+    const checkOutErr = new Error(
+      err.response.data + ' Please adjust your order.'
+    );
+    return Promise.reject(checkOutErr);
   }
 };
 

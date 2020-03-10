@@ -2,23 +2,21 @@ import React, {Fragment} from 'react';
 import StripeCheckout from 'react-stripe-checkout';
 import axios from 'axios';
 
-const StripeButton = ({name, description, amount}) => {
+const StripeButton = ({name, description, amount, disabled, handleOrder}) => {
   const publishableKey = 'pk_test_QGnJrXZhIjT3yjaGH7uhphH3000XV2w3gY';
-
-  const onToken = token => {
+  const onToken = async token => {
     const body = {
       token: token
     };
-    axios
-      .post('/payment', body)
-      .then(response => {
-        console.log(response);
-        alert('Payment Success');
-      })
-      .catch(error => {
-        console.log('Payment Error: ', error);
-        alert('Payment Error');
-      });
+    try {
+      await handleOrder();
+      const response = await axios.post('http://localhost:8080/payment', body);
+      console.log(response);
+      alert('Payment Success');
+    } catch (error) {
+      console.log('Payment Error: ', error);
+      alert('Payment Error');
+    }
   };
 
   return (
@@ -31,6 +29,8 @@ const StripeButton = ({name, description, amount}) => {
       token={onToken}
       stripeKey={publishableKey}
       billingAddress={false}
+      disabled={disabled}
+      handleOrder={handleOrder}
     />
   );
 };

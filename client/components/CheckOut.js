@@ -2,51 +2,105 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {getCart, checkOut, deleteLineItem, addToCart} from '../store';
+import StripeButton from './StripeCheckout';
 
 class CheckOut extends React.Component {
   constructor(props) {
     super(props);
-
+    this.state = {
+      orderError: '',
+      stripeDisabled: true,
+      stripeShowModal: false
+    };
+    this.handleToggleStripe = this.handleToggleStripe.bind(this);
     this.handlePlaceOrder = this.handlePlaceOrder.bind(this);
   }
+
   componentDidMount() {
     this.props.getCart(this.props.user.id);
   }
 
-  handlePlaceOrder() {
-    e.preventDefault();
+  handleToggleStripe() {
+    console.log('toggling stripe button');
+    this.setState(state => {
+      return {
+        stripeDisabled: !state.stripeDisabled,
+        stripeShowModal: !state.stripeShowModal
+      };
+    });
+  }
+
+  async handlePlaceOrder(userId) {
+    try {
+      await this.props.checkOut(userId);
+      this.setState(state => {
+        return {stripeDisabled: false};
+      });
+    } catch (error) {
+      this.setState(state => {
+        return {orderError: error.message};
+      });
+    }
   }
 
   render() {
     const {cart, user, deleteLineItem, addToCart} = this.props;
+    const round = numb => Number(Math.round(numb + 'e' + 2) + 'e-' + 2);
+    const orderTotal = cart.reduce((sum, item) => {
+      return sum + item.lineItem.quantity * item.price;
+    }, 0);
+    const itemsTotal = cart.reduce((count, item) => {
+      return count + item.lineItem.quantity;
+    }, 0);
+
     return (
-      <section className="checkout-container">
+      <div>
         <div>
-          <h4>Shipping Details</h4>
-          <li>address info...</li>
-          <li>address info...</li>
-          <li>address info...</li>
+          <h4>{this.state.orderError.length ? this.state.orderError : ''}</h4>
         </div>
-        <div>
-          <h4>Billing Details</h4>
-          <li>billing info...</li>
-          <li>billing info...</li>
-          <li>billing info...</li>
-        </div>
-        <div>
-          <h5>Cart items</h5>
-          {cart.map(item => (
-            <CartItemMenu
-              key={item.id}
-              user={user}
-              item={item}
-              deleteLineItem={deleteLineItem}
-              addToCart={addToCart}
+        <section className="checkout-container">
+          <div>
+            <h5>Cart items</h5>
+            <div className="cart-items-container">
+              {cart.map(item => (
+                <CartItemMenu
+                  key={item.id}
+                  user={user}
+                  item={item}
+                  deleteLineItem={deleteLineItem}
+                  addToCart={addToCart}
+                />
+              ))}
+            </div>
+          </div>
+          <div>
+            <h3>Order Summary</h3>
+            <div className="order-summary-line">
+              <h5># Items:</h5>
+              <span>{itemsTotal}</span>
+            </div>
+            <div className="order-summary-line">
+              <h5>Order Total:</h5>
+              <span>{orderTotal / 100}</span>
+            </div>
+            <button
+              type="button"
+              // onClick={e => this.handlePlaceOrder(e, user.id)}
+              onClick={this.handleToggleStripe}
+            >
+              Check Out (BUY)
+            </button>
+            <StripeButton
+              // disabled={this.state.stripeDisabled}
+              userId={user.id}
+              handleOrder={() => this.handlePlaceOrder(user.id)}
+              name="Grace Slothpper"
+              description="Place your order"
+              amount={orderTotal}
             />
-          ))}
-        </div>
-        <button type="button">Place your order</button>
-      </section>
+          </div>
+        </section>
+      </div>
     );
   }
 }
