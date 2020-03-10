@@ -1,6 +1,8 @@
 const crypto = require('crypto');
 const Sequelize = require('sequelize');
 const db = require('../db');
+const Product = require('./product');
+const LineItem = require('./line-item');
 
 const User = db.define('user', {
   email: {
@@ -70,6 +72,48 @@ User.prototype.correctPassword = function(candidatePwd) {
 /**
  * classMethods
  */
+User.getCart = async function(userId) {
+  const user = await this.findByPk(userId);
+  const cart = await user.getOrders({
+    where: {
+      isCart: true
+    },
+    include: [{model: Product}]
+  });
+  return cart[0];
+};
+
+User.checkOut = async function(userId) {
+  const cart = await this.getCart(userId);
+  const lineItemsQuery = await LineItem.findAll({
+    where: {
+      orderId: cart.id
+    }
+  });
+  // update the cart items with the sold price
+  const lineItems = await Promise.all(
+    lineItemsQuery.map(async item => {
+      const itemWithProduct = await item.withProductInfo();
+      item.soldPrice = itemWithProduct.product.price;
+      await item.save();
+      return itemWithProduct;
+    })
+  );
+  // update products with amount purchased
+  await Promise.all(
+    lineItems.map(async item => {
+      const product = await Product.findByPk(item.productId);
+      product.stock = product.stock - item.quantity;
+      await product.save();
+    })
+  );
+  // mark order as complete via isCart
+  cart.isCart = false;
+  cart.date = new Date();
+  await cart.save();
+  return cart;
+};
+
 User.generateSalt = function() {
   return crypto.randomBytes(16).toString('base64');
 };
