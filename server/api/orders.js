@@ -206,10 +206,3 @@ router.delete('/cart/:userId', validateUserOrGuest, async (req, res, next) => {
     next(err);
   }
 });
-
-/*
-  before updating order isCart to false,
-  get all line items
-    add line item sold price to line item
-
-*/

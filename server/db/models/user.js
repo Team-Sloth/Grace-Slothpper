@@ -91,7 +91,7 @@ User.checkOut = async function(userId) {
     }
   });
   // update the cart items with the sold price
-  const lineItems = await Promise.all(
+  await Promise.all(
     lineItemsQuery.map(async item => {
       const itemWithProduct = await item.withProductInfo();
       item.soldPrice = itemWithProduct.product.price;
