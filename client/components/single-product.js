@@ -55,18 +55,18 @@ class SingleProduct extends React.Component {
     return (
       <div>
         <div>
-          <ul className="cards">
-            <li className="cards__item">
-              <div className="card">
-                <div className="card__content">
-                  <div className="card__title">
+          <ul className="cardsi">
+            <li className="cardsi__item">
+              <div className="cardi">
+                <div className="cardi__content">
+                  <div className="cardi__title">
                     {product.name} &mdash; ${product.price / 100}
                   </div>
-                  <div className="card__image">
+                  <div className="cardi__image">
                     <img src={product.imageUrl} />
                   </div>
-                  <p className="card__text">{product.description}</p>
-                  <div className="card__text">In Stock: {product.stock}</div>
+                  <p className="cardi__text">{product.description}</p>
+                  <div className="cardi__text">In Stock: {product.stock}</div>
                   <div className="add-item-container">
                     <button
                       type="button"
@@ -94,7 +94,7 @@ class SingleProduct extends React.Component {
                   <div>
                     <button
                       type="button"
-                      className="card_btn--block card_btn"
+                      className="cardi_btn--block cardi_btn"
                       onClick={() =>
                         this.props.addToCart(user.id, product.id, itemQuantity)
                       }

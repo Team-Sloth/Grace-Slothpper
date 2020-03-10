@@ -161,47 +161,7 @@ form div {
   color: red;
 }
 
-/* Cards Start */
-.card_btn {
-  background-color: black;
-  border: 1px solid black;
-  border-radius: 1rem;
-  color: #cccccc;
-  padding: 0.8rem;
-  font-size: 400;
-}
-
-.card_btn--block {
-  display: block;
-  width: 100%;
-  cursor: pointer;
-}
-
-.card_btn a:link {
-  background-color: #696969;
-  text-decoration: none;
-}
-
-.card_btn a:hover {
-  background-color: #696969;
-  text-decoration: none;
-}
-
-.card_btn a:active {
-  background-color: #696969;
-  text-decoration: none;
-}
-
-.card_btn a:visited {
-  background-color: #696969;
-  text-decoration: none;
-}
-
-.card_btn.focus,
-.card_btn:focus {
-  outline: 0;
-  box-shadow: none !important;
-}
+/* Cards Multiple Product Page */
 
 .cards {
   display: flex;
@@ -218,7 +178,7 @@ form div {
   }
 }
 @media (min-width: 56rem) {
-  .cards__item: {
+  .cards__item {
     width: 33.3333%;
   }
 }
@@ -304,4 +264,146 @@ a:visited {
   text-decoration: none;
 }
 
-/* Cards End */
+/* Cards Multiple Product Page End */
+
+/* Card Single Product Page */
+.cardsi {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+@media (min-width: 40rem) {
+  .cardsi__item {
+    width: 50%;
+  }
+}
+@media (min-width: 56rem) {
+  .cardsi__item {
+    width: 33.3333%;
+  }
+}
+
+.cardsi__item {
+  display: flex;
+  padding: 1rem;
+  text-decoration: none;
+  max-width: 600px;
+}
+
+.cardi {
+  background-color: white;
+  border-radius: 0.25rem;
+  box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+  overflow: hidden;
+  color: #696969;
+  text-decoration: none;
+}
+
+.cardi__item a:link,
+a:hover,
+a:active,
+a:visited {
+  text-decoration: none;
+}
+
+.cardi__image {
+  overflow: hidden;
+}
+
+.cardi__content {
+  display: flex;
+  /* flex: 1 1 auto; */
+  flex-direction: column;
+  justify-content: space-between;
+  height: auto;
+  padding: 1rem;
+}
+
+.cardi__content a:link,
+a:hover,
+a:active,
+a:visited {
+  text-decoration: none;
+}
+
+.cardi__title {
+  color: #696969;
+  font-size: 1.25rem;
+  font-weight: 300;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.cardi__title a:link,
+a:hover,
+a:active,
+a:visited {
+  text-decoration: none;
+}
+
+.cardi__text {
+  flex: 1 1 auto;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  margin-bottom: 1.25rem;
+  text-decoration: none;
+}
+
+.cardi__text a:link,
+a:hover,
+a:active,
+a:visited {
+  text-decoration: none;
+}
+
+.cardi_btn {
+  background-color: black;
+  border: 1px solid black;
+  border-radius: 1rem;
+  color: #cccccc;
+  padding: 0.8rem;
+  font-size: 400;
+}
+
+.cardi_btn--block {
+  display: block;
+  width: 100%;
+  cursor: pointer;
+}
+
+.cardi_btn a:link {
+  background-color: #696969;
+  text-decoration: none;
+}
+
+.cardi_btn a:hover {
+  background-color: #696969;
+  text-decoration: none;
+}
+
+.cardi_btn a:active {
+  background-color: #696969;
+  text-decoration: none;
+}
+
+.cardi_btn a:visited {
+  background-color: #696969;
+  text-decoration: none;
+}
+
+.cardi_btn.focus,
+.cardi_btn:focus {
+  outline: 0;
+  box-shadow: none !important;
+}
+
+/* Cards Single Product Ends */
