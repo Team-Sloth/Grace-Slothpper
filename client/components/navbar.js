@@ -11,7 +11,7 @@ const Navbar = ({handleClick, isLoggedIn, user}) => (
       <div className="siteHeader__section">
         <div className="siteHeader__logo">
           <Link to="/home">
-            <img src="/img/sloth.gif" width={90} />
+            <img src="/img/sloth-md.gif" width={80} />
           </Link>
         </div>
         <div className="siteHeader__logo">
