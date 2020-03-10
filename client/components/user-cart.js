@@ -17,7 +17,7 @@ class UserCart extends React.Component {
     return (
       <div>
         <h3>{user.firstName ? user.firstName : 'Guest'}'s Cart:</h3>
-        {cart
+        {cart && cart.length > 0
           ? cart.map(p => (
               <div key={p.id}>
                 <img src={p.imageUrl} height="200px" />
