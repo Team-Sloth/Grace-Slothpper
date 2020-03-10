@@ -1,5 +1,6 @@
 import axios from 'axios';
 import history from '../history';
+import swal from 'sweetalert';
 
 /**
  * ACTION TYPES
@@ -47,6 +48,12 @@ export const getCart = userId => async dispatch => {
 export const addToCart = (userId, productId, quantity) => async dispatch => {
   try {
     quantity = Number(quantity);
+    swal({
+      title: 'Product Added',
+      text: `Added:${quantity}`,
+      icon: 'success',
+      timer: 3000
+    });
     const res = await axios.put(`/api/orders/cart/${userId}`, {
       productId,
       quantity
