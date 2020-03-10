@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const User = require('../db/models/user');
+const {User, LineItem, Order} = require('../db/models');
 module.exports = router;
 
 router.post('/login', async (req, res, next) => {
@@ -12,6 +12,28 @@ router.post('/login', async (req, res, next) => {
       console.log('Incorrect password for user:', req.body.email);
       res.status(401).send('Wrong username and/or password');
     } else {
+      if (req.session.cart) {
+        const [cartOrder, _] = await Order.findOrCreate({
+          where: {
+            userId: user.id,
+            isCart: true
+          }
+        });
+        for (let i = 0; i < req.session.cart.length; i++) {
+          const [lineItem, created] = await LineItem.findOrCreate({
+            where: {
+              orderId: cartOrder.id,
+              productId: req.session.cart[i].lineItem.productId
+            }
+          });
+          if (created) {
+            lineItem.quantity = req.session.cart[i].lineItem.quantity;
+          } else {
+            lineItem.quantity += req.session.cart[i].lineItem.quantity;
+          }
+          await lineItem.save();
+        }
+      }
       req.login(user, err => (err ? next(err) : res.json(user)));
     }
   } catch (err) {
