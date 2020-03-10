@@ -26,7 +26,7 @@ class Products extends React.Component {
         p => p.category && p.category.name === category
       );
     }
-
+    // <div className="card__image"><img src={p.imageUrl} /></div>
     return (
       <div>
         <div>
@@ -36,20 +36,26 @@ class Products extends React.Component {
             </div>
           )}
         </div>
-
-        <div className="product-list">
-          {filteredProducts.map(p => (
-            <div className="product-list-item" key={p.id}>
-              <Link to={`/products/${p.id}`} key={p.id}>
-                <h3>
-                  {p.name} &mdash; ${p.price / 100}
-                </h3>
-                <img src={p.imageUrl} width="100%" />
-                <p>{p.description}</p>
-                <p>In Stock: {p.stock}</p>
-              </Link>
-            </div>
-          ))}
+        <div>
+          <ul className="cards">
+            {filteredProducts.map(p => (
+              <li className="cards__item" key={p.id}>
+                <Link to={`/products/${p.id}`}>
+                  <div className="card">
+                    <div className="card__image">
+                      <img src={p.imageUrl} />
+                    </div>
+                    <div className="card__content">
+                      <div className="card__title">
+                        {p.name} &mdash; ${p.price / 100}
+                      </div>
+                      <p className="card__text">{p.description}</p>
+                    </div>
+                  </div>
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     );

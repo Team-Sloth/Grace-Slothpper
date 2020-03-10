@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {getSingleProduct, addToCart} from '../store';
 import UpdateProductForm from './update-single-product';
+import {Link} from 'react-router-dom';
 
 /**
  * COMPONENT
@@ -54,35 +55,57 @@ class SingleProduct extends React.Component {
     return (
       <div>
         <div>
-          <h3>
-            {product.name} &mdash; ${product.price / 100}
-          </h3>
-          <img src={product.imageUrl} />
-          <p>{product.description}</p>
-          <p>In Stock: {product.stock}</p>
-        </div>
-        <div className="add-item-container">
-          <button type="button" onClick={e => this.handleDecrement(e)}>
-            -
-          </button>
-          <select value={itemQuantity} onChange={e => this.handleSelect(e)}>
-            {productStockArr.map(el => (
-              <option key={el} value={el}>
-                {el}
-              </option>
-            ))}
-          </select>
-          <button type="button" onClick={e => this.handleIncrement(e)}>
-            +
-          </button>
-          <button
-            type="button"
-            onClick={() =>
-              this.props.addToCart(user.id, product.id, itemQuantity)
-            }
-          >
-            Add to Cart!
-          </button>
+          <ul className="cards">
+            <li className="cards__item">
+              <div className="card">
+                <div className="card__content">
+                  <div className="card__title">
+                    {product.name} &mdash; ${product.price / 100}
+                  </div>
+                  <div className="card__image">
+                    <img src={product.imageUrl} />
+                  </div>
+                  <p className="card__text">{product.description}</p>
+                  <div className="card__text">In Stock: {product.stock}</div>
+                  <div className="add-item-container">
+                    <button
+                      type="button"
+                      onClick={e => this.handleDecrement(e)}
+                    >
+                      -
+                    </button>
+                    <select
+                      value={itemQuantity}
+                      onChange={e => this.handleSelect(e)}
+                    >
+                      {productStockArr.map(el => (
+                        <option key={el} value={el}>
+                          {el}
+                        </option>
+                      ))}
+                    </select>
+                    <button
+                      type="button"
+                      onClick={e => this.handleIncrement(e)}
+                    >
+                      +
+                    </button>
+                  </div>
+                  <div>
+                    <button
+                      type="button"
+                      className="card_btn--block card_btn"
+                      onClick={() =>
+                        this.props.addToCart(user.id, product.id, itemQuantity)
+                      }
+                    >
+                      ADD TO CART
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
         </div>
         {user.isAdmin ? (
           <UpdateProductForm key={product.id} product={product} />

@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 
-const SubNavbar = ({handleClick}) => (
+const SubMenu = ({handleClick}) => (
   <div>
     <div className="siteHeader">
       <div className="siteHeader__section">
@@ -19,4 +19,4 @@ const SubNavbar = ({handleClick}) => (
   </div>
 );
 
-export default SubNavbar;
+export default SubMenu;
