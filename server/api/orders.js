@@ -93,6 +93,7 @@ router.put('/cart/:userId', validateUserOrGuest, async (req, res, next) => {
         req.session.cart.push(product);
       }
       product.lineItem.quantity += req.body.quantity;
+
       res.json(product.lineItem);
       return;
     }
@@ -109,6 +110,8 @@ router.put('/cart/:userId', validateUserOrGuest, async (req, res, next) => {
         productId: req.body.productId
       }
     });
+    const productInfo = await lineItem.withProductInfo();
+    const stock = productInfo.product.stock;
     lineItem.quantity = lineItem.quantity + req.body.quantity;
     await lineItem.save();
     res.json(lineItem);

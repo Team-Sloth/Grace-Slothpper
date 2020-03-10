@@ -49,17 +49,7 @@ class UserCart extends React.Component {
               </div>
             ))
           : ''}
-        <Link to="/checkout">Check Out (Order Confirmation)</Link>
-        <button type="button" onClick={() => this.props.checkOut(user.id)}>
-          Check Out (BUY)
-        </button>
-        <div>
-          <StripeButton
-            name="Grace Slothpper"
-            description="Finalize Order"
-            amount={600000}
-          />
-        </div>
+        <Link to="/checkout">Review Your Order</Link>
       </div>
     );
   }

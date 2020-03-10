@@ -1,5 +1,7 @@
 import axios from 'axios';
 import history from '../history';
+import swal from 'sweetalert';
+import Swal from 'sweetalert2';
 
 /**
  * ACTION TYPES
@@ -47,6 +49,13 @@ export const getCart = userId => async dispatch => {
 export const addToCart = (userId, productId, quantity) => async dispatch => {
   try {
     quantity = Number(quantity);
+    Swal.fire({
+      title: 'Product Added',
+      text: `Added:${quantity}`,
+      icon: 'success',
+      timer: 2000,
+      timerProgressBar: true
+    });
     const res = await axios.put(`/api/orders/cart/${userId}`, {
       productId,
       quantity
@@ -96,6 +105,16 @@ export default function(state = [], action) {
       const stateCopy = [...state];
       const product = stateCopy.find(p => p.id === action.lineItem.productId);
       if (product) {
+        if (action.lineItem.quantity <= product.stock) {
+          product.hasIssue = false;
+          product.issueText = null;
+          console.log('reducer ', product);
+        } else {
+          product.hasIssue = true;
+          product.issueText =
+            'Desired amount greater than stock.  Please update order';
+        }
+
         product.lineItem = action.lineItem;
       }
       return stateCopy;
