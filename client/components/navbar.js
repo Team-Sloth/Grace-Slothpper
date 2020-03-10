@@ -3,36 +3,59 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {logout} from '../store';
+import SubNavbar from './subnavbar';
 
 const Navbar = ({handleClick, isLoggedIn, user}) => (
   <div>
-    <nav>
-      <Link to="/home">
-        <img src="/img/sloth.gif" width={90} />
-      </Link>
+    <div className="siteHeader">
+      <div className="siteHeader__section">
+        <div className="siteHeader__logo">
+          <Link to="/home">
+            <img src="/img/sloth-md.gif" width={80} />
+          </Link>
+        </div>
+        <div className="siteHeader__logo">
+          <Link to="/home">Slothpper</Link>
+        </div>
+      </div>
       {isLoggedIn ? (
-        <div>
+        <div className="siteHeader__section">
           {/* The navbar will show these links after you log in */}
-          <a href="#" onClick={handleClick}>
-            Logout
-          </a>
-          <Link to="/products">Products</Link>
-          <Link to="/cart">Cart</Link>
-          <Link to={`/orders/${user.id}`}>My Orders</Link>
+          <div className="siteHeader__item siteHeaderButton">
+            <Link to="/cart">CART(0)</Link>
+          </div>
+          <div className="siteHeader__item siteHeaderButton">
+            <Link to={`/orders/${user.id}`}>My Orders</Link>
+          </div>
+          <div className="siteHeader__item siteHeaderButton">
+            <a href="#" onClick={handleClick}>
+              Logout
+            </a>
+          </div>
           {user !== undefined && user.isAdmin ? (
-            <Link to="/admin">Admin Page</Link>
+            <div className="siteHeader__item siteHeaderButton">
+              <Link to="/admin">Admin Page</Link>
+            </div>
           ) : null}
         </div>
       ) : (
         <div>
           {/* The navbar will show these links before you log in */}
-          <Link to="/products">Products</Link>
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
-          <Link to="/cart">Cart</Link>
+          <div className="siteHeader__section">
+            <div className="siteHeader__item siteHeaderButton">
+              <Link to="/cart">CART(0)</Link>
+            </div>
+            <div className="siteHeader__item siteHeaderButton">
+              <Link to="/signup">Sign Up</Link>
+            </div>
+            <div className="siteHeader__item siteHeaderButton">
+              <Link to="/login">Login</Link>
+            </div>
+          </div>
         </div>
       )}
-    </nav>
+    </div>
+    <SubNavbar />
   </div>
 );
 
