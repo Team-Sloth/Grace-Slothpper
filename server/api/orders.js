@@ -199,6 +199,18 @@ router.delete('/cart/:userId', validateUserOrGuest, async (req, res, next) => {
       res.json(order);
       return;
     }
+    const order = await Order.findOne({
+      where: {
+        userId: req.params.userId,
+        isCart: true
+      }
+    });
+    const isValidOrder = await Order.ensureValidOrder(order.id);
+    if (!isValidOrder) {
+      const error = new Error('Order quantity exceeds in stock amount');
+      error.status = 400;
+      return next(error);
+    }
     const cart = await User.checkOut(req.params.userId);
     res.json(cart);
   } catch (err) {
