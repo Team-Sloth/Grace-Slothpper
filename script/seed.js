@@ -447,7 +447,6 @@ async function seed() {
       await products[i].setCategory(virus);
     } else {
       await products[i].setCategory(sloth);
-      console.log(products[i]);
     }
   }
 
