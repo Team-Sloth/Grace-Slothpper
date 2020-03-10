@@ -2,14 +2,27 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {getOrderHistory} from '../store';
 
+const NoOrders = () => {
+  return (
+    <section>
+      <h5>
+        You have no previous orders to display. Check out our products page to
+        get started!
+      </h5>
+    </section>
+  );
+};
+
 class Orders extends Component {
   componentWillMount() {
     this.props.getOrderHistory(this.props.match.params.id);
   }
   render() {
     const {orderHistory} = this.props;
-    console.log(orderHistory);
-    return (
+
+    return !orderHistory.length ? (
+      <NoOrders />
+    ) : (
       <section>
         {orderHistory.length &&
           orderHistory.map(order => (
