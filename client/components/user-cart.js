@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
+import StripeButton from './StripeCheckout';
 import {getCart, checkOut, deleteLineItem, addToCart} from '../store';
 
 /**
@@ -52,6 +53,13 @@ class UserCart extends React.Component {
         <button type="button" onClick={() => this.props.checkOut(user.id)}>
           Check Out (BUY)
         </button>
+        <div>
+          <StripeButton
+            name="Grace Slothpper"
+            description="Finalize Order"
+            amount={10000}
+          />
+        </div>
       </div>
     );
   }

@@ -1,6 +1,7 @@
 const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
+const cors = require('cors');
 const compression = require('compression');
 const session = require('express-session');
 const passport = require('passport');
@@ -43,13 +44,15 @@ passport.deserializeUser(async (id, done) => {
 const createApp = () => {
   // logging middleware
   app.use(morgan('dev'));
-
   // body parsing middleware
   app.use(express.json());
   app.use(express.urlencoded({extended: true}));
 
   // compression middleware
   app.use(compression());
+
+  // stripe payment middleware
+  app.use(cors());
 
   // session middleware with passport
   app.use(
