@@ -1,7 +1,7 @@
 import React from 'react';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import SearchIcon from '@material-ui/icons/Search';
-import TextField from '@material-ui/core/TextField';
+// import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+// import SearchIcon from '@material-ui/icons/Search';
+// import TextField from '@material-ui/core/TextField';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
@@ -25,9 +25,7 @@ const Navbar = ({handleClick, isLoggedIn, user}) => (
         <div className="siteHeader__section">
           {/* The navbar will show these links after you log in */}
           <div className="siteHeader__item siteHeaderButton">
-            <Link to="/cart">
-              <ShoppingCartIcon color="disabled" />(0)
-            </Link>
+            <Link to="/cart">CART(0)</Link>
           </div>
           <div className="siteHeader__item siteHeaderButton">
             <Link to={`/orders/${user.id}`}>My Orders</Link>
