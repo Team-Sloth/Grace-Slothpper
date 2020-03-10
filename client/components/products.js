@@ -36,15 +36,6 @@ class Products extends React.Component {
             </div>
           )}
         </div>
-        <Link to="/products">
-          <button>Show All</button>
-        </Link>
-        <Link to="/products?category=Sloth">
-          <button>Filter Sloth Only</button>
-        </Link>
-        <Link to="/products?category=Coronavirus">
-          <button>Filter Coronavirus Only</button>
-        </Link>
 
         <div className="product-list">
           {filteredProducts.map(p => (
