@@ -29,6 +29,21 @@ div {
   margin: 0;
 }
 
+button {
+  background-color: #b8860b;
+  border: none;
+  color: white;
+  padding: 5px 5px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #990000;
+}
+
 /**
 * Site Header/ Nav/ Footer
 */

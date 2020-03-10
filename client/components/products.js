@@ -52,7 +52,7 @@ class Products extends React.Component {
           <ul className="cards">
             {slicedProducts.map(p => (
               <li className="cards__item" key={p.id}>
-                <Link to={`/products/${p.id}`}>
+                <Link to={`/products/${p.id}`} style={{textDecoration: 'none'}}>
                   <div className="card">
                     <div className="card__image">
                       <img src={p.imageUrl} />

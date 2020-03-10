@@ -1,6 +1,7 @@
 import React, {Fragment} from 'react';
 import StripeCheckout from 'react-stripe-checkout';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 const StripeButton = ({name, description, amount, disabled, handleOrder}) => {
   const publishableKey = 'pk_test_QGnJrXZhIjT3yjaGH7uhphH3000XV2w3gY';
@@ -10,12 +11,24 @@ const StripeButton = ({name, description, amount, disabled, handleOrder}) => {
     };
     try {
       await handleOrder();
-      const response = await axios.post('http://localhost:8080/payment', body);
+      const response = await axios.post('/payment', body);
       console.log(response);
-      alert('Payment Success');
+      Swal.fire({
+        title: 'Success!',
+        text: `Total Paid: $${amount / 100}`,
+        icon: 'success',
+        timer: 3000,
+        timerProgressBar: true
+      });
     } catch (error) {
       console.log('Payment Error: ', error);
-      alert('Payment Error');
+      Swal.fire({
+        title: 'Payment Error',
+        text: `Not Charged: ${amount}`,
+        icon: 'failure',
+        timer: 3000,
+        timerProgressBar: true
+      });
     }
   };
 
