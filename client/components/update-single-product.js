@@ -9,11 +9,13 @@ class EditSingleProduct extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: 0,
-      name: '',
-      description: '',
-      price: 0,
-      stock: 0
+      fields: {
+        id: 0,
+        name: '',
+        description: '',
+        price: 0,
+        stock: 0
+      }
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
