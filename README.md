@@ -1,5 +1,5 @@
 
-![Image description](/img/sloth-md.gif)
+![Grace Slothpper](https://grace-slothpper.herokuapp.com/img/sloth-md.gif)
 
 # Slothpper: Harry Max Nes Mercedes
 
