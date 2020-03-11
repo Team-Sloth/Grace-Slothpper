@@ -48,7 +48,7 @@ class Routes extends Component {
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route path="/orders/:id" component={Orders} />
-            <Route path="*" component={NotFound} />
+
             {isAdmin && (
               <Switch>
                 <Route exact path="/admin" component={AdminNav} />
@@ -57,6 +57,7 @@ class Routes extends Component {
                 <Route path="/add-product" component={AddProduct} />
               </Switch>
             )}
+            <Route path="*" component={NotFound} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}

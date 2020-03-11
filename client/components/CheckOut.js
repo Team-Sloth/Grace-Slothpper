@@ -2,13 +2,15 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {getCart, checkOut, deleteLineItem, addToCart} from '../store';
+import OrderConfirmation from './OrderConfirmation';
 import StripeButton from './StripeCheckout';
 
 class CheckOut extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      orderError: ''
+      orderError: '',
+      showOrderConfirmation: false
     };
     this.handlePlaceOrder = this.handlePlaceOrder.bind(this);
   }
@@ -21,6 +23,9 @@ class CheckOut extends React.Component {
     try {
       await this.props.checkOut(userId);
       console.log('Successfully placed order!');
+      this.setState(state => {
+        return {showOrderConfirmation: true};
+      });
     } catch (error) {
       this.setState(state => {
         return {orderError: error.message};
@@ -49,6 +54,7 @@ class CheckOut extends React.Component {
         <div>
           <h4>{this.state.orderError.length ? this.state.orderError : ''}</h4>
         </div>
+        <div>{this.state.showOrderConfirmation && <OrderConfirmation />}</div>
         <section className="checkout-container">
           <div>
             <h5>Cart items</h5>
