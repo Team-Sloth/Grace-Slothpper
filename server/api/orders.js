@@ -9,7 +9,9 @@ module.exports = router;
 
 router.get('/', validateAdmin, async (req, res, next) => {
   try {
-    const orders = await Order.findAll();
+    const orders = await Order.findAll({
+      include: [{model: Product}]
+    });
     res.json(orders);
   } catch (err) {
     next(err);

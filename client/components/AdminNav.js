@@ -16,7 +16,7 @@ const AdminNav = ({isAdmin}) => (
             <Link to="/products">Products</Link>
           </li>
           <li>
-            <Link to="/orders">Orders</Link>
+            <Link to="/admin/orders">Orders</Link>
           </li>
         </ul>
       </div>
