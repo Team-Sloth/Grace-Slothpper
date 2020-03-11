@@ -1,7 +1,7 @@
 
 ![Image description](/img/sloth-md.gif)
 
-# Slothpper Harry Max Nes Mercedes
+# Slothpper: Harry Max Nes Mercedes
 
 _Good things come w' sloths_
 
