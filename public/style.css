@@ -29,6 +29,46 @@ div {
   margin: 0;
 }
 
+h1.main {
+  color: #4c4a37;
+  font-size: 45px;
+  font-weight: bold;
+  line-height: 48px;
+  padding: 20px;
+  text-align: center;
+  margin: 0;
+}
+
+h2.sub {
+  color: black;
+  font-size: 30px;
+  font-weight: bold;
+  line-height: 30px;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  margin: 0;
+}
+
+h2.sub:hover {
+  color: #990000;
+}
+
+h5.sub {
+  color: black;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 30px;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  margin: 0;
+}
+
+h5.sub:hover {
+  color: #b8860b;
+}
+
 button {
   background-color: #b8860b;
   border: none;
