@@ -21,3 +21,4 @@ export {default as CheckOut} from './CheckOut';
 export {default as Orders} from './Orders';
 export {default as AdminOrders} from './AdminOrders';
 export {default as NotFound} from './NotFound';
+export {default as NoOrders} from './NoOrders';

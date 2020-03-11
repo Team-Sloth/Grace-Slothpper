@@ -16,6 +16,7 @@ import {
   Home,
   CheckOut,
   NotFound,
+  NoOrders,
   Orders
 } from './components';
 import {me} from './store';
@@ -43,11 +44,11 @@ class Routes extends Component {
         <Route path="/home" component={Home} />
         <Route path="/cart" component={UserCart} />
         <Route path="/checkout" component={CheckOut} />
-        <Route path="*" component={NotFound} />
         {isLoggedIn && (
           <Switch>
-            {/* Routes placed here are only available after logging in */}\
+            {/* Routes placed here are only available after logging in */}
             <Route path="/orders/:id" component={Orders} />
+            <Route path="*" component={NotFound} />
             {isAdmin && (
               <Switch>
                 <Route exact path="/admin" component={AdminNav} />
@@ -59,6 +60,7 @@ class Routes extends Component {
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
+        <Route path="*" component={NotFound} />
         <Route component={Login} />
       </Switch>
     );

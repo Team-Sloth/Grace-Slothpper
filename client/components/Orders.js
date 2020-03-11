@@ -1,17 +1,18 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {getOrderHistory} from '../store';
+import NoOrders from './NoOrders';
 
-const NoOrders = () => {
-  return (
-    <section>
-      <h5>
-        You have no previous orders to display. Check out our products page to
-        get started!
-      </h5>
-    </section>
-  );
-};
+// const NoOrders = () => {
+//   return (
+//     <section>
+//       <h5>
+//         You have no previous orders to display. Check out our products page to
+//         get started!
+//       </h5>
+//     </section>
+//   );
+// };
 
 class Orders extends Component {
   componentWillMount() {
