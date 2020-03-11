@@ -40,7 +40,7 @@ const styles = {
   }
 };
 
-const OrderTable = props => {
+export const OrderTable = props => {
   const {order} = props;
   const round = numb => Number(Math.round(numb + 'e' + 2) + 'e-' + 2);
   const getOrderTotal = arr => {

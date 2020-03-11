@@ -4,6 +4,7 @@ import {withRouter, Route, Switch} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {
   AdminNav,
+  AdminOrders,
   Login,
   Signup,
   UserCart,
@@ -51,6 +52,7 @@ class Routes extends Component {
               <Switch>
                 <Route exact path="/admin" component={AdminNav} />
                 <Route exact path="/users" component={Users} />
+                <Route exact path="/admin/orders" component={AdminOrders} />
                 <Route path="/add-product" component={AddProduct} />
               </Switch>
             )}
