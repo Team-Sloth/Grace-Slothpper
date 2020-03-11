@@ -26,12 +26,13 @@ export const me = () => async dispatch => {
   try {
     const res = await axios.get('/auth/me');
     dispatch(getUser(res.data || defaultUser));
-    if (res.data) {
+    if (res.data.googleId) {
       Swal.fire({
-        title: `Welcome, ${res.data.firstName}`,
-        text: 'Check out our latest inventory.',
+        title: `Logged in as ${res.data.firstName} through Google`,
         icon: 'success',
-        timer: 3000
+        timer: 1500,
+        toast: true,
+        position: 'top'
       });
     }
   } catch (err) {
@@ -60,7 +61,6 @@ export const auth = (
       icon: 'success',
       timer: 3000
     });
-    console.log('RESSS--->', res);
   } catch (authError) {
     return dispatch(getUser({error: authError}));
   }
@@ -68,6 +68,14 @@ export const auth = (
   try {
     dispatch(getUser(res.data));
     history.push('/home');
+    if (res.data) {
+      Swal.fire({
+        title: `Welcome, ${res.data.firstName}`,
+        text: 'Check out our latest inventory.',
+        icon: 'success',
+        timer: 3000
+      });
+    }
   } catch (dispatchOrHistoryErr) {
     console.error(dispatchOrHistoryErr);
   }
