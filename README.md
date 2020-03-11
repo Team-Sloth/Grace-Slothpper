@@ -12,9 +12,7 @@ Slothpper is an eCommerce application built by Team Sloth -- Nes Martinez, Harry
 Looking to mix up a backend with `express`/`sequelize` and a frontend with
 `react`/`redux`? That's `Slothpper`!
 
-Based on Bloilermaker by Fullstack
-see the [Boilermaker Guided Tour][boilermaker-yt]
-[boilermaker-yt]: https://www.youtube.com/playlist?list=PLx0iOsdUOUmn7D5XL4mRUftn8hvAJGs8H
+Based on Bloilermaker by Fullstack.
 
 ## Setup
 
