@@ -23,12 +23,22 @@ class Products extends React.Component {
     }
     let category = qs.category;
     let filteredProducts = products;
-    if (category) {
+    if (category && category !== '') {
       filteredProducts = products.filter(
         p => p.category && p.category.name === category
       );
+    } else {
+      category = '';
     }
-    // <div className="card__image"><img src={p.imageUrl} /></div>
+    let page = +qs.page;
+    const pageSize = 6;
+    if (!page) {
+      page = 1;
+    }
+    const slicedProducts = filteredProducts.slice(
+      (page - 1) * pageSize,
+      page * pageSize
+    );
     return (
       <div>
         <div>
@@ -40,7 +50,7 @@ class Products extends React.Component {
         </div>
         <div>
           <ul className="cards">
-            {filteredProducts.map(p => (
+            {slicedProducts.map(p => (
               <li className="cards__item" key={p.id}>
                 <Link to={`/products/${p.id}`}>
                   <div className="card">
@@ -58,6 +68,27 @@ class Products extends React.Component {
               </li>
             ))}
           </ul>
+        </div>
+        <div className="paginator">
+          <div className="siteHeader__item siteHeaderButton">
+            <Link
+              to={`/products?category=${category}&page=${
+                page - 1 > 0 ? page - 1 : page
+              }`}
+            >
+              Previous Page
+            </Link>
+          </div>
+          Page {page}
+          <div className="siteHeader__item siteHeaderButton">
+            <Link
+              to={`/products?category=${category}&page=${
+                page * pageSize <= filteredProducts.length ? page + 1 : page
+              }`}
+            >
+              Next Page
+            </Link>
+          </div>
         </div>
       </div>
     );
