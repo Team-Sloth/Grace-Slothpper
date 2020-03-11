@@ -171,8 +171,23 @@ form div {
 /* SINGLE PRODUCT STYLES */
 .add-item-container {
   display: flex;
-  justify-content: space-between;
-  width: 200px;
+  justify-content: space-evenly;
+  width: 90%;
+  margin: auto;
+  margin-bottom: 15px;
+}
+
+.add-item-container button {
+  width: 3rem;
+}
+
+.add-item-container * {
+  height: 1.75rem;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 1.05rem;
+  background: #edf1f1;
+  border: 3px solid #edf1f1;
 }
 
 /* ORDER CONFIRMATION STYLES */

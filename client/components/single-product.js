@@ -12,20 +12,26 @@ class SingleProduct extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      itemQuantity: 1
+      itemQuantity: 1,
+      maxAmount: 10
     };
     this.handleDecrement = this.handleDecrement.bind(this);
     this.handleIncrement = this.handleIncrement.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
   }
 
-  componentDidMount() {
-    this.props.getSingleProduct(this.props.match.params.id);
+  async componentDidMount() {
+    await this.props.getSingleProduct(this.props.match.params.id);
+    if (this.props.product.stock < this.state.maxAmount) {
+      this.setState(state => {
+        return {maxAmount: this.props.product.stock};
+      });
+    }
   }
 
   handleSelect(e) {
     this.setState({
-      itemQuantity: e.target.value
+      itemQuantity: Number(e.target.value)
     });
   }
 
@@ -39,7 +45,7 @@ class SingleProduct extends React.Component {
 
   handleIncrement(e) {
     e.preventDefault();
-    if (this.state.itemQuantity >= this.props.product.stock) return;
+    if (this.state.itemQuantity >= this.state.maxAmount) return;
     this.setState(state => {
       return {itemQuantity: state.itemQuantity + 1};
     });
@@ -67,41 +73,49 @@ class SingleProduct extends React.Component {
                   </div>
                   <p className="cardi__text">{product.description}</p>
                   <div className="cardi__text">In Stock: {product.stock}</div>
-                  <div className="add-item-container">
-                    <button
-                      type="button"
-                      onClick={e => this.handleDecrement(e)}
-                    >
-                      -
-                    </button>
-                    <select
-                      value={itemQuantity}
-                      onChange={e => this.handleSelect(e)}
-                    >
-                      {productStockArr.map(el => (
-                        <option key={el} value={el}>
-                          {el}
-                        </option>
-                      ))}
-                    </select>
-                    <button
-                      type="button"
-                      onClick={e => this.handleIncrement(e)}
-                    >
-                      +
-                    </button>
-                  </div>
-                  <div>
-                    <button
-                      type="button"
-                      className="cardi_btn--block cardi_btn"
-                      onClick={() =>
-                        this.props.addToCart(user.id, product.id, itemQuantity)
-                      }
-                    >
-                      ADD TO CART
-                    </button>
-                  </div>
+                  {this.state.maxAmount > 0 ? (
+                    <section>
+                      <div className="add-item-container">
+                        <button
+                          type="button"
+                          onClick={e => this.handleDecrement(e)}
+                        >
+                          -
+                        </button>
+                        <select
+                          value={itemQuantity}
+                          onChange={e => this.handleSelect(e)}
+                        >
+                          {productStockArr.map(el => (
+                            <option key={el} value={el}>
+                              {el}
+                            </option>
+                          ))}
+                        </select>
+                        <button
+                          type="button"
+                          onClick={e => this.handleIncrement(e)}
+                        >
+                          +
+                        </button>
+                      </div>
+                      <div>
+                        <button
+                          type="button"
+                          className="cardi_btn--block cardi_btn"
+                          onClick={() =>
+                            this.props.addToCart(
+                              user.id,
+                              product.id,
+                              itemQuantity
+                            )
+                          }
+                        >
+                          ADD TO CART
+                        </button>
+                      </div>
+                    </section>
+                  ) : null}
                 </div>
               </div>
             </li>
