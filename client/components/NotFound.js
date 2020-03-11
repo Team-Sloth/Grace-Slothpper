@@ -5,9 +5,9 @@ class NotFound extends React.Component {
   render() {
     return (
       <div>
-        <div className="cardsi">
-          <Link to="/products">
-            <img src="https://i.imgflip.com/3s3xcc.jpg" />
+        <div>
+          <Link to="/products?category=Sloth" style={{textDecoration: 'none'}}>
+            <h5 className="sub">There's nothing here...</h5>
           </Link>
         </div>
         <div>
