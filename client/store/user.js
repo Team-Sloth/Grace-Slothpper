@@ -1,6 +1,6 @@
 import axios from 'axios';
 import history from '../history';
-import swal from 'sweetalert';
+import Swal from 'sweetalert2';
 
 /**
  * ACTION TYPES
@@ -26,6 +26,14 @@ export const me = () => async dispatch => {
   try {
     const res = await axios.get('/auth/me');
     dispatch(getUser(res.data || defaultUser));
+    if (res.data) {
+      Swal.fire({
+        title: `Welcome, ${res.data.firstName}`,
+        text: 'Check out our latest inventory.',
+        icon: 'success',
+        timer: 3000
+      });
+    }
   } catch (err) {
     console.error(err);
   }
@@ -46,12 +54,13 @@ export const auth = (
       firstName,
       lastName
     });
-    swal({
-      title: `Welcome back, ${email}`,
+    Swal.fire({
+      title: `Welcome, ${email}`,
       text: 'Check out our latest inventory.',
       icon: 'success',
       timer: 3000
     });
+    console.log('RESSS--->', res);
   } catch (authError) {
     return dispatch(getUser({error: authError}));
   }
@@ -69,7 +78,7 @@ export const logout = () => async dispatch => {
     await axios.post('/auth/logout');
     dispatch(removeUser());
     history.push('/login');
-    swal({
+    Swal.fire({
       title: `Goodbye!`,
       text: 'See you soon.',
       timer: 2000
