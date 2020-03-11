@@ -34,18 +34,22 @@ class UserCart extends React.Component {
                 >
                   DELETE PRODUCT X
                 </button>
-                <button
-                  type="button"
-                  onClick={() => this.props.addToCart(user.id, p.id, 1)}
-                >
-                  +1
-                </button>
-                <button
-                  type="button"
-                  onClick={() => this.props.addToCart(user.id, p.id, -1)}
-                >
-                  -1
-                </button>
+                <div>
+                  <button
+                    type="button"
+                    onClick={() => this.props.addToCart(user.id, p.id, 1)}
+                  >
+                    ADD +1
+                  </button>
+                </div>
+                <div>
+                  <button
+                    type="button"
+                    onClick={() => this.props.addToCart(user.id, p.id, -1)}
+                  >
+                    REMOVE -1
+                  </button>
+                </div>
               </div>
             ))
           : ''}
