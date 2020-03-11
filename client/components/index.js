@@ -20,3 +20,4 @@ export {default as SingleUserCartTable} from './SingleUserCartTable';
 export {default as CheckOut} from './CheckOut';
 export {default as Orders} from './Orders';
 export {default as NotFound} from './NotFound';
+export {default as NoOrders} from './NoOrders';
